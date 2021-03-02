@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using TextSpeech;
 using UnityEngine.UI;
@@ -10,6 +11,7 @@ public class SpeechManager : MonoBehaviour
     const string LANG_CODE = "en-US";
     [SerializeField]
     Text speechText;
+    AudioClip myAudioClip;
     void Start() {
         Setup(LANG_CODE);
         #if UNITY_ANDROID
@@ -46,12 +48,15 @@ public class SpeechManager : MonoBehaviour
 
     #region Speech to Text
     public void StartListening() {
+        //myAudioClip =  Microphone.Start(null, false, 100, 44100);
         SpeechToText.instance.StartRecording();
         Debug.Log("Listening started...");
     }
     public void StopListening() {
         SpeechToText.instance.StopRecording();
-        Debug.Log("Listening stopped...");
+        int lastTime = Microphone.GetPosition(null);
+        //SavWav.Save("myfile", SavWav.TrimSilence(myAudioClip, (float)lastTime / 60f));
+        Debug.Log("Listening stopped..." + lastTime + " seconds");
     }
     void OnFinalSpeechResult(string result) {
         speechText.text = result;

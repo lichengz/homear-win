@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "801KPMZ1409427",
         "name": "com.DefaultCompany.homear",
-        "processId": 19567,
+        "processId": 2806,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -17,55 +17,55 @@
         {
             "deviceId": "801KPMZ1409427",
             "name": "com.DefaultCompany.homear",
-            "processId": 10443,
+            "processId": 28755,
             "exited": true
         },
         {
             "deviceId": "801KPMZ1409427",
             "name": "com.DefaultCompany.homear",
-            "processId": 12841,
+            "processId": 29917,
             "exited": true
         },
         {
             "deviceId": "801KPMZ1409427",
             "name": "com.DefaultCompany.homear",
-            "processId": 14165,
+            "processId": 31697,
             "exited": true
         },
         {
             "deviceId": "801KPMZ1409427",
             "name": "com.DefaultCompany.homear",
-            "processId": 15405,
+            "processId": 32218,
             "exited": true
         },
         {
             "deviceId": "801KPMZ1409427",
             "name": "com.DefaultCompany.homear",
-            "processId": 16413,
+            "processId": 1775,
             "exited": true
         },
         {
             "deviceId": "801KPMZ1409427",
             "name": "com.DefaultCompany.homear",
-            "processId": 16998,
-            "exited": false
-        },
-        {
-            "deviceId": "801KPMZ1409427",
-            "name": "com.DefaultCompany.homear",
-            "processId": 17734,
-            "exited": false
-        },
-        {
-            "deviceId": "801KPMZ1409427",
-            "name": "com.DefaultCompany.homear",
-            "processId": 19567,
+            "processId": 2806,
             "exited": false
         },
         {
             "deviceId": "RFCNA0ATWHX",
             "name": "com.DefaultCompany.homear",
             "processId": 2415,
+            "exited": true
+        },
+        {
+            "deviceId": "RFCNA0ATWHX",
+            "name": "com.sec.android.app.launcher",
+            "processId": 1457,
+            "exited": false
+        },
+        {
+            "deviceId": "RFCNA0ATWHX",
+            "name": "com.DefaultCompany.homear",
+            "processId": 27123,
             "exited": false
         }
     ],
