@@ -163,8 +163,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f374db2933844347a588068328bdfec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  placePrefab: {fileID: 9209851146159859359, guid: 9ef416240554aa7468bbe19ee3beecad,
+  placePrefab: {fileID: 800442048784722122, guid: 560415bc622a6d24da8b04de6b70d725,
     type: 3}
+  placedObjects: []
+  activeColor: {r: 1, g: 0, b: 0, a: 1}
+  inactiveColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  arCamera: {fileID: 1244745631}
 --- !u!114 &1165422792
 MonoBehaviour:
   m_ObjectHideFlags: 0
