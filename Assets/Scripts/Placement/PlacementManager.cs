@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(ARRaycastManager))]
 public class PlacementManager : MonoBehaviour
@@ -33,6 +34,10 @@ public class PlacementManager : MonoBehaviour
         }
     }
 
+    [SerializeField]
+    Button CubeButton;
+    [SerializeField]
+    Button BallButton;
 
     /// <summary>
     /// Awake is called when the script instance is being loaded.
@@ -40,6 +45,8 @@ public class PlacementManager : MonoBehaviour
     void Awake()
     {
         aRRaycastManager = GetComponent<ARRaycastManager>();
+        CubeButton.onClick.AddListener(() => ChangePrefabTo("Cube"));
+        BallButton.onClick.AddListener(() => ChangePrefabTo("Ball"));
     }
 
     // Update is called once per frame
@@ -125,5 +132,11 @@ public class PlacementManager : MonoBehaviour
     {
         if (lastSelectedObject != null) lastSelectedObject.IsSelected = false;
         lastSelectedObject = null;
+    }
+
+    public void ChangePrefabTo(string prefabName)
+    {
+        placePrefab = Resources.Load<GameObject>($"Prefabs/{prefabName}");
+        if (placePrefab == null) Debug.Log("Invalid prefabName");
     }
 }

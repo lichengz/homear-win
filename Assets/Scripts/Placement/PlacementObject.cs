@@ -31,7 +31,7 @@ public class PlacementObject : MonoBehaviour
         OverLayTextMesh = GetComponentInChildren<TextMeshPro>();
         if (OverLayTextMesh != null)
         {
-            OverLayTextMesh.text = OverLayText;
+            OverLayTextMesh.text = "Just a " + gameObject.name;
             OverLayTextMesh.gameObject.SetActive(false);
         }
 
