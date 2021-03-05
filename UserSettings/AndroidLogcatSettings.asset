@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "801KPMZ1409427",
         "name": "com.DefaultCompany.homear",
-        "processId": 4874,
+        "processId": 14144,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -48,6 +48,24 @@
             "deviceId": "801KPMZ1409427",
             "name": "com.DefaultCompany.homear",
             "processId": 4874,
+            "exited": false
+        },
+        {
+            "deviceId": "801KPMZ1409427",
+            "name": "com.DefaultCompany.homear",
+            "processId": 5572,
+            "exited": false
+        },
+        {
+            "deviceId": "801KPMZ1409427",
+            "name": "com.DefaultCompany.homear",
+            "processId": 13290,
+            "exited": false
+        },
+        {
+            "deviceId": "801KPMZ1409427",
+            "name": "com.DefaultCompany.homear",
+            "processId": 14144,
             "exited": false
         },
         {

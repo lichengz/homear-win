@@ -71,13 +71,10 @@ public class PlacementManager : MonoBehaviour
                     if (aRRaycastManager.Raycast(touchPosition, hits, TrackableType.PlaneWithinPolygon))
                     {
                         var hitPose = hits[0].pose;
-                        if (lastSelectedObject == null)
-                        {
-                            lastSelectedObject = Instantiate(placePrefab, hitPose.position, hitPose.rotation).GetComponent<PlacementObject>();
-                            placedObjects = FindObjectsOfType<PlacementObject>();
-                            ChangeSelectedObject(lastSelectedObject);
-                            Debug.Log("Place instantiated");
-                        }
+                        lastSelectedObject = Instantiate(placePrefab, hitPose.position, hitPose.rotation).GetComponent<PlacementObject>();
+                        placedObjects = FindObjectsOfType<PlacementObject>();
+                        ChangeSelectedObject(lastSelectedObject);
+                        Debug.Log("Place instantiated");
                     }
                     break;
 
@@ -96,7 +93,7 @@ public class PlacementManager : MonoBehaviour
                     break;
 
                 case TouchPhase.Ended:
-                    ClearSelection();
+                    //ClearSelection();
                     break;
             }
 
@@ -126,7 +123,7 @@ public class PlacementManager : MonoBehaviour
 
     void ClearSelection()
     {
-        if(lastSelectedObject != null) lastSelectedObject.IsSelected = false;
+        if (lastSelectedObject != null) lastSelectedObject.IsSelected = false;
         lastSelectedObject = null;
     }
 }
