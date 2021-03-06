@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "801KPMZ1409427",
         "name": "com.DefaultCompany.homear",
-        "processId": 30750,
+        "processId": 5583,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -72,6 +72,54 @@
             "deviceId": "801KPMZ1409427",
             "name": "com.DefaultCompany.homear",
             "processId": 30750,
+            "exited": false
+        },
+        {
+            "deviceId": "801KPMZ1409427",
+            "name": "com.DefaultCompany.homear",
+            "processId": 27459,
+            "exited": false
+        },
+        {
+            "deviceId": "801KPMZ1409427",
+            "name": "com.DefaultCompany.homear",
+            "processId": 28250,
+            "exited": false
+        },
+        {
+            "deviceId": "801KPMZ1409427",
+            "name": "com.DefaultCompany.homear",
+            "processId": 28709,
+            "exited": false
+        },
+        {
+            "deviceId": "801KPMZ1409427",
+            "name": "com.DefaultCompany.homear",
+            "processId": 30183,
+            "exited": false
+        },
+        {
+            "deviceId": "801KPMZ1409427",
+            "name": "com.DefaultCompany.homear",
+            "processId": 30963,
+            "exited": false
+        },
+        {
+            "deviceId": "801KPMZ1409427",
+            "name": "com.DefaultCompany.homear",
+            "processId": 3998,
+            "exited": false
+        },
+        {
+            "deviceId": "801KPMZ1409427",
+            "name": "com.DefaultCompany.homear",
+            "processId": 4449,
+            "exited": false
+        },
+        {
+            "deviceId": "801KPMZ1409427",
+            "name": "com.DefaultCompany.homear",
+            "processId": 5583,
             "exited": false
         },
         {

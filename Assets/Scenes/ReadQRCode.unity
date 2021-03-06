@@ -172,27 +172,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 1165422788}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f374db2933844347a588068328bdfec, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ab0e80cee9cc1d44928bfe488dd1e2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  placePrefab: {fileID: 800442048784722122, guid: 560415bc622a6d24da8b04de6b70d725,
+  m_PointCloudPrefab: {fileID: 7721544262030650555, guid: dee9499cda597dc4f8f7a88f8accf212,
     type: 3}
-  placedObjects: []
-  activeColor: {r: 1, g: 0, b: 0, a: 1}
-  inactiveColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  arCamera: {fileID: 1244745631}
-  CubeButton: {fileID: 0}
-  BallButton: {fileID: 0}
---- !u!114 &1165422792
+--- !u!114 &1165422791 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 7843536570245144415, guid: ea52605926b3e7b4896c4bb8f612b044,
+    type: 3}
+  m_PrefabInstance: {fileID: 7843536571269230488}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1165422788}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa17d122634046b4a8e23048891fafc5, type: 3}
+  m_Script: {fileID: 11500000, guid: e1760703bbd54c04488a8d10600262ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!20 &1244745631 stripped
@@ -348,8 +342,16 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 11446614, guid: b2464bcbb9cb0e148844469d8bdd76dd, type: 3}
-      propertyPath: isShowPopupAndroid
+    - target: {fileID: 460522, guid: b2464bcbb9cb0e148844469d8bdd76dd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 460522, guid: b2464bcbb9cb0e148844469d8bdd76dd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 460522, guid: b2464bcbb9cb0e148844469d8bdd76dd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -379,6 +381,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 107480, guid: a592da1d5e8dba34f96c7ca9db6bc203, type: 3}
+      propertyPath: m_Name
+      value: TextToSpeech
+      objectReference: {fileID: 0}
     - target: {fileID: 460522, guid: a592da1d5e8dba34f96c7ca9db6bc203, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -409,6 +415,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 460522, guid: a592da1d5e8dba34f96c7ca9db6bc203, type: 3}
       propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 460522, guid: a592da1d5e8dba34f96c7ca9db6bc203, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 460522, guid: a592da1d5e8dba34f96c7ca9db6bc203, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 460522, guid: a592da1d5e8dba34f96c7ca9db6bc203, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -531,26 +549,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: EventSystem
       objectReference: {fileID: 0}
-    - target: {fileID: 3825722435134028090, guid: 78b1048bff9e7114f945daeec85811ed,
-        type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 1244745631}
-    - target: {fileID: 8413309058212208008, guid: 78b1048bff9e7114f945daeec85811ed,
-        type: 3}
-      propertyPath: arCamera
-      value: 
-      objectReference: {fileID: 1244745631}
-    - target: {fileID: 8413309058212208008, guid: 78b1048bff9e7114f945daeec85811ed,
-        type: 3}
-      propertyPath: BallButton
-      value: 
-      objectReference: {fileID: 1347222273}
-    - target: {fileID: 8413309058212208008, guid: 78b1048bff9e7114f945daeec85811ed,
-        type: 3}
-      propertyPath: CubeButton
-      value: 
-      objectReference: {fileID: 873071659}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78b1048bff9e7114f945daeec85811ed, type: 3}
 --- !u!1001 &2383689555378386377
@@ -967,6 +965,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1165422789, guid: ea52605926b3e7b4896c4bb8f612b044, type: 3}
+      propertyPath: BallButton
+      value: 
+      objectReference: {fileID: 1347222273}
+    - target: {fileID: 1165422789, guid: ea52605926b3e7b4896c4bb8f612b044, type: 3}
+      propertyPath: CubeButton
+      value: 
+      objectReference: {fileID: 873071659}
     - target: {fileID: 7843536570245144412, guid: ea52605926b3e7b4896c4bb8f612b044,
         type: 3}
       propertyPath: m_Name
@@ -1027,12 +1033,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7843536570245144415, guid: ea52605926b3e7b4896c4bb8f612b044,
-        type: 3}
-      propertyPath: m_PlanePrefab
-      value: 
-      objectReference: {fileID: 4617925906250193355, guid: f779d56b9fa56e44cb5036537e09db36,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea52605926b3e7b4896c4bb8f612b044, type: 3}
 --- !u!1001 &8860085247832172867
@@ -1057,6 +1057,11 @@ PrefabInstance:
       propertyPath: PlacementUI
       value: 
       objectReference: {fileID: 1775571749}
+    - target: {fileID: 8860085249312751890, guid: 4c47a6da151e6c245b9da29df0a6cf4b,
+        type: 3}
+      propertyPath: aRPlaneManager
+      value: 
+      objectReference: {fileID: 1165422791}
     - target: {fileID: 8860085249312751891, guid: 4c47a6da151e6c245b9da29df0a6cf4b,
         type: 3}
       propertyPath: m_Pivot.x

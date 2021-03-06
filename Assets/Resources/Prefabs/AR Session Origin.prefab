@@ -136,6 +136,8 @@ GameObject:
   - component: {fileID: 7843536570245144414}
   - component: {fileID: 7843536570245144413}
   - component: {fileID: 7843536570245144415}
+  - component: {fileID: 1165422792}
+  - component: {fileID: 1165422789}
   m_Layer: 0
   m_Name: AR Session Origin
   m_TagString: Untagged
@@ -183,5 +185,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1760703bbd54c04488a8d10600262ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PlanePrefab: {fileID: 0}
+  m_PlanePrefab: {fileID: 4617925906250193355, guid: f779d56b9fa56e44cb5036537e09db36,
+    type: 3}
   m_DetectionMode: -1
+--- !u!114 &1165422792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7843536570245144412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa17d122634046b4a8e23048891fafc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1165422789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7843536570245144412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f374db2933844347a588068328bdfec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  placePrefab: {fileID: 2321044263383519580, guid: 354191d962e0d194c9a61eae3ec6436b,
+    type: 3}
+  placedObjects: []
+  activeColor: {r: 1, g: 0, b: 0, a: 1}
+  inactiveColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  arCamera: {fileID: 7843536570097917959}
+  CubeButton: {fileID: 0}
+  BallButton: {fileID: 0}

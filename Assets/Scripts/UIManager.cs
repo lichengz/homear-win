@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.XR.ARFoundation;
+using UnityEngine.XR.ARSubsystems;
 
 public class UIManager : MonoBehaviour
 {
@@ -9,6 +11,8 @@ public class UIManager : MonoBehaviour
     Canvas SpeechUI;
     [SerializeField]
     Canvas PlacementUI;
+    [SerializeField]
+    ARPlaneManager aRPlaneManager;
     /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>
@@ -36,5 +40,9 @@ public class UIManager : MonoBehaviour
     public void SwitchPlacementUI()
     {
         PlacementUI.gameObject.SetActive(!PlacementUI.gameObject.activeInHierarchy);
+        aRPlaneManager.enabled = !aRPlaneManager.enabled;
+        foreach(ARPlane plane in aRPlaneManager.trackables) {
+            plane.gameObject.SetActive(aRPlaneManager.enabled);
+        }
     }
 }
