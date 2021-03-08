@@ -20,6 +20,7 @@ public class UIManager : MonoBehaviour
     {
         SpeechUI.gameObject.SetActive(false);
         PlacementUI.gameObject.SetActive(false);
+        aRPlaneManager.enabled = false;
     }
     // Start is called before the first frame update
     void Start()

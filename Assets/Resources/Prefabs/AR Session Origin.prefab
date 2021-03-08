@@ -138,6 +138,9 @@ GameObject:
   - component: {fileID: 7843536570245144415}
   - component: {fileID: 1165422792}
   - component: {fileID: 1165422789}
+  - component: {fileID: 4707618652411525749}
+  - component: {fileID: 1165422790}
+  - component: {fileID: 736876449948806980}
   m_Layer: 0
   m_Name: AR Session Origin
   m_TagString: Untagged
@@ -220,3 +223,45 @@ MonoBehaviour:
   arCamera: {fileID: 7843536570097917959}
   CubeButton: {fileID: 0}
   BallButton: {fileID: 0}
+--- !u!114 &4707618652411525749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7843536570245144412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab0e80cee9cc1d44928bfe488dd1e2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PointCloudPrefab: {fileID: 7721544262030650555, guid: dee9499cda597dc4f8f7a88f8accf212,
+    type: 3}
+--- !u!114 &1165422790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7843536570245144412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dea56a9eaadd1c439095de4f9a371cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ReferenceLibrary: {fileID: 11400000, guid: 683b09f0c8eadc64fb4c1d9a6998d36d, type: 2}
+  m_MaxNumberOfMovingImages: 2
+  m_TrackedImagePrefab: {fileID: 0}
+--- !u!114 &736876449948806980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7843536570245144412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 818e2ecc09f693d4b97738dde454489d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  placeablePrefabs: []
