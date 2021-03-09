@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 using UnityEngine.UI;
@@ -52,11 +53,12 @@ public class PlacementManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
             touchPosition = touch.position;
-
+            if (IsOnGUi(touchPosition)) return;
             switch (touch.phase)
             {
                 case TouchPhase.Began:
@@ -109,6 +111,16 @@ public class PlacementManager : MonoBehaviour
 
     }
 
+    bool IsOnGUi(Vector2 pos)
+    {
+        if (EventSystem.current.IsPointerOverGameObject()) return false;
+        PointerEventData eventPosition = new PointerEventData(EventSystem.current);
+        eventPosition.position = new Vector2(pos.x, pos.y);
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventPosition, results);
+        return results.Count > 0;
+    }
+
     void ChangeSelectedObject(PlacementObject selected)
     {
         foreach (PlacementObject cur in placedObjects)
@@ -117,13 +129,15 @@ public class PlacementManager : MonoBehaviour
             if (selected != cur)
             {
                 cur.IsSelected = false;
-                meshRenderer.material.color = inactiveColor;
+                // meshRenderer.material.color = inactiveColor;
+                cur.GetComponent<Outline>().enabled = false;
             }
             else
             {
                 lastSelectedObject = cur;
                 cur.IsSelected = true;
-                meshRenderer.material.color = activeColor;
+                // meshRenderer.material.color = activeColor;
+                cur.GetComponent<Outline>().enabled = true;
             }
         }
     }
