@@ -223,6 +223,7 @@ MonoBehaviour:
   arCamera: {fileID: 7843536570097917959}
   CubeButton: {fileID: 0}
   BallButton: {fileID: 0}
+  uIManager: {fileID: 0}
 --- !u!114 &4707618652411525749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,4 +265,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 818e2ecc09f693d4b97738dde454489d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  placeablePrefabs: []
+  placeablePrefabs:
+  - {fileID: 2800768993332814789, guid: 840e5ee650e8dae4e9fc3c3d38015183, type: 3}
+  - {fileID: 3742885835261632328, guid: 6e4338ed25624e34494f9e9acc89a1e8, type: 3}

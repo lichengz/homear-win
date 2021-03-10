@@ -531,3 +531,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpeechUI: {fileID: 0}
   PlacementUI: {fileID: 0}
+  ManipUI: {fileID: 0}
+  aRPlaneManager: {fileID: 0}
+  placementManager: {fileID: 0}

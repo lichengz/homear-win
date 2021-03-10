@@ -12,7 +12,14 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     Canvas PlacementUI;
     [SerializeField]
+    Canvas ManipUI;
+    [SerializeField]
+    Text ScaleText;
+    [SerializeField]
     ARPlaneManager aRPlaneManager;
+    [SerializeField]
+    PlacementManager placementManager;
+
     /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>
@@ -20,6 +27,7 @@ public class UIManager : MonoBehaviour
     {
         SpeechUI.gameObject.SetActive(false);
         PlacementUI.gameObject.SetActive(false);
+        ManipUI.gameObject.SetActive(false);
         aRPlaneManager.enabled = false;
     }
     // Start is called before the first frame update
@@ -34,6 +42,15 @@ public class UIManager : MonoBehaviour
 
     }
 
+    public bool isUIactive()
+    {
+        if (ManipUI.gameObject.activeInHierarchy)
+        {
+            return true;
+        }
+        return false;
+    }
+
     public void SwitchSpeechUI()
     {
         SpeechUI.gameObject.SetActive(!SpeechUI.gameObject.activeInHierarchy);
@@ -42,8 +59,25 @@ public class UIManager : MonoBehaviour
     {
         PlacementUI.gameObject.SetActive(!PlacementUI.gameObject.activeInHierarchy);
         aRPlaneManager.enabled = !aRPlaneManager.enabled;
-        foreach(ARPlane plane in aRPlaneManager.trackables) {
+        foreach (ARPlane plane in aRPlaneManager.trackables)
+        {
             plane.gameObject.SetActive(aRPlaneManager.enabled);
         }
+    }
+    public void SwitchManipUI()
+    {
+        ManipUI.gameObject.SetActive(!ManipUI.gameObject.activeInHierarchy);
+    }
+
+    public void UpdateManipUI()
+    {
+        ManipUI.GetComponentInChildren<Slider>().value = placementManager.lastSelectedObject.curScale;
+    }
+
+    public void ManipScale()
+    {
+        int offset = (int)ManipUI.GetComponentInChildren<Slider>().value;
+        placementManager.ScaleSelectedObject(offset);
+        ScaleText.text = string.Format("Scale:{0:0.0}", 1.0f + offset / 10f);
     }
 }

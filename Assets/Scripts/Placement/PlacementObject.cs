@@ -7,6 +7,8 @@ public class PlacementObject : MonoBehaviour
 {
     [SerializeField]
     bool Selected;
+    public Vector3 oriScale { get; set; }
+    public int curScale { get; set; }
     public bool IsSelected
     {
         get

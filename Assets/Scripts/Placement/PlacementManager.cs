@@ -13,7 +13,7 @@ public class PlacementManager : MonoBehaviour
     GameObject placePrefab;
     [SerializeField]
     PlacementObject[] placedObjects;
-    PlacementObject lastSelectedObject;
+    public PlacementObject lastSelectedObject { get; set; }
     [SerializeField]
     Color activeColor = Color.red;
     [SerializeField]
@@ -39,6 +39,10 @@ public class PlacementManager : MonoBehaviour
     Button CubeButton;
     [SerializeField]
     Button BallButton;
+    [SerializeField]
+    UIManager uIManager;
+    Touch touch;
+    bool manipCanvasOpening = false;
 
     /// <summary>
     /// Awake is called when the script instance is being loaded.
@@ -53,10 +57,11 @@ public class PlacementManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (uIManager.isUIactive()) return;
 
         if (Input.touchCount > 0)
         {
-            Touch touch = Input.GetTouch(0);
+            touch = Input.GetTouch(0);
             touchPosition = touch.position;
             if (IsOnGUi(touchPosition)) return;
             switch (touch.phase)
@@ -83,11 +88,27 @@ public class PlacementManager : MonoBehaviour
                         lastSelectedObject = Instantiate(placePrefab, hitPose.position, hitPose.rotation).GetComponent<PlacementObject>();
                         placedObjects = FindObjectsOfType<PlacementObject>();
                         ChangeSelectedObject(lastSelectedObject);
+                        lastSelectedObject.oriScale = lastSelectedObject.transform.localScale;
                         Debug.Log("Place instantiated");
+                    }
+                    break;
+                case TouchPhase.Stationary:
+                    // Open ManipCanvas
+                    if (manipCanvasOpening) break;
+                    RaycastHit ho;
+                    if (Physics.Raycast(arCamera.ScreenPointToRay(touchPosition), out ho))
+                    {
+                        PlacementObject placementObject = ho.transform.GetComponent<PlacementObject>();
+                        if (placementObject != null && placementObject == lastSelectedObject)
+                        {
+                            StartCoroutine(ManipUICountdown());
+                            manipCanvasOpening = true;
+                        }
                     }
                     break;
 
                 case TouchPhase.Moved:
+                    if (manipCanvasOpening) break;
                     if (aRRaycastManager.Raycast(touchPosition, hits, TrackableType.PlaneWithinPolygon))
                     {
                         // Dragging
@@ -121,6 +142,22 @@ public class PlacementManager : MonoBehaviour
         return results.Count > 0;
     }
 
+    private IEnumerator ManipUICountdown()
+    {
+        int i = 0;
+        do
+        {
+            yield return new WaitForSeconds(0.1f);
+            i++;
+            Debug.Log(i);
+        } while ((touch.phase == TouchPhase.Stationary || (touch.phase == TouchPhase.Moved && touch.deltaPosition.magnitude < 0.5f)) && i < 5);
+        if (i == 5)
+        {
+            uIManager.SwitchManipUI();
+        }
+        manipCanvasOpening = false;
+    }
+
     void ChangeSelectedObject(PlacementObject selected)
     {
         foreach (PlacementObject cur in placedObjects)
@@ -140,6 +177,7 @@ public class PlacementManager : MonoBehaviour
                 cur.GetComponent<Outline>().enabled = true;
             }
         }
+        uIManager.UpdateManipUI();
     }
 
     void ClearSelection()
@@ -152,5 +190,12 @@ public class PlacementManager : MonoBehaviour
     {
         placePrefab = Resources.Load<GameObject>($"Prefabs/{prefabName}");
         if (placePrefab == null) Debug.Log("Invalid prefabName");
+    }
+
+    public void ScaleSelectedObject(int scaling)
+    {
+        if (lastSelectedObject == null) return;
+        lastSelectedObject.curScale = scaling;
+        lastSelectedObject.transform.localScale = lastSelectedObject.oriScale * (1 + scaling / 10f);
     }
 }
