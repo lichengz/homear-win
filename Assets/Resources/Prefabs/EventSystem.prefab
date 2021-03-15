@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1563721630635869668}
   - component: {fileID: 1563721630635869669}
   - component: {fileID: 1563721630635869657}
+  - component: {fileID: 7815145755772951769}
   - component: {fileID: 9121939235383462646}
   m_Layer: 0
   m_Name: EventSystem
@@ -112,6 +113,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speechText: {fileID: 0}
+--- !u!114 &7815145755772951769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1563721630635869671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27e8275f914ea27478aa7a84c441b3ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &9121939235383462646
 MonoBehaviour:
   m_ObjectHideFlags: 0
