@@ -16,6 +16,8 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     Text ScaleText;
     [SerializeField]
+    Canvas AnnotationUI;
+    [SerializeField]
     ARPlaneManager aRPlaneManager;
     [SerializeField]
     PlacementManager placementManager;
@@ -69,7 +71,7 @@ public class UIManager : MonoBehaviour
         ManipUI.gameObject.SetActive(!ManipUI.gameObject.activeInHierarchy);
     }
 
-    public void UpdateManipUI()
+    private void UpdateManipUI()
     {
         ManipUI.GetComponentInChildren<Slider>().value = placementManager.lastSelectedObject.curScale;
     }
@@ -79,5 +81,16 @@ public class UIManager : MonoBehaviour
         int offset = (int)ManipUI.GetComponentInChildren<Slider>().value;
         placementManager.ScaleSelectedObject(offset);
         ScaleText.text = string.Format("Scale:{0:0.0}", 1.0f + offset / 10f);
+    }
+    private void UpdateAnnotationUI(PlacementObject.Annotation anno)
+    {
+        AnnotationUI.transform.GetChild(0).GetChild(0).gameObject.SetActive(anno.isReminderActive);
+        AnnotationUI.transform.GetChild(0).GetChild(1).gameObject.SetActive(anno.isScheduleActive);
+    }
+
+    public void UpdateUIAccordingToSelectedObject()
+    {
+        UpdateManipUI();
+        UpdateAnnotationUI(placementManager.lastSelectedObject.annotation);
     }
 }

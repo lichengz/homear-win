@@ -13,7 +13,7 @@ public class PlacementManager : MonoBehaviour
     GameObject placePrefab;
     [SerializeField]
     PlacementObject[] placedObjects;
-    public PlacementObject lastSelectedObject { get; set; }
+    public PlacementObject lastSelectedObject;
     [SerializeField]
     Color activeColor = Color.red;
     [SerializeField]
@@ -58,6 +58,19 @@ public class PlacementManager : MonoBehaviour
     void Update()
     {
         if (uIManager.isUIactive()) return;
+        // Select in editor
+        Ray r = arCamera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit o;
+        if (Physics.Raycast(r, out o))
+        {
+            PlacementObject placementObject = o.transform.GetComponent<PlacementObject>();
+            if (placementObject != null)
+            {
+                ChangeSelectedObject(placementObject);
+            }
+        }
+
+        // Touch Screen
 
         if (Input.touchCount > 0)
         {
@@ -86,7 +99,7 @@ public class PlacementManager : MonoBehaviour
                     {
                         var hitPose = hits[0].pose;
                         lastSelectedObject = Instantiate(placePrefab, hitPose.position, hitPose.rotation).GetComponent<PlacementObject>();
-                        placedObjects = FindObjectsOfType<PlacementObject>();
+                        // placedObjects = FindObjectsOfType<PlacementObject>();
                         ChangeSelectedObject(lastSelectedObject);
                         lastSelectedObject.oriScale = lastSelectedObject.transform.localScale;
                         Debug.Log("Place instantiated");
@@ -160,6 +173,7 @@ public class PlacementManager : MonoBehaviour
 
     void ChangeSelectedObject(PlacementObject selected)
     {
+        placedObjects = FindObjectsOfType<PlacementObject>();
         foreach (PlacementObject cur in placedObjects)
         {
             MeshRenderer meshRenderer = cur.GetComponent<MeshRenderer>();
@@ -177,7 +191,7 @@ public class PlacementManager : MonoBehaviour
                 cur.GetComponent<Outline>().enabled = true;
             }
         }
-        uIManager.UpdateManipUI();
+        uIManager.UpdateUIAccordingToSelectedObject();
     }
 
     void ClearSelection()

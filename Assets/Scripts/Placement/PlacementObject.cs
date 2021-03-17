@@ -22,6 +22,7 @@ public class PlacementObject : MonoBehaviour, ISaveable
             OverLayTextMesh.gameObject.SetActive(this.Selected);
         }
     }
+    public Annotation annotation;
     [SerializeField]
     TextMeshPro OverLayTextMesh;
     [SerializeField]
@@ -54,6 +55,14 @@ public class PlacementObject : MonoBehaviour, ISaveable
         public SerializableVector3 position;
         public SerializableVector3 rotation;
         public SerializableVector3 scale;
+    }
+
+    // Annotation
+    [Serializable]
+    public struct Annotation
+    {
+        public Boolean isReminderActive;
+        public Boolean isScheduleActive;
     }
 
     /// <summary>
