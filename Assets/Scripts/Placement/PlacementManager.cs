@@ -59,6 +59,7 @@ public class PlacementManager : MonoBehaviour
     {
         if (uIManager.isUIactive()) return;
         // Select in editor
+#if UNITY_EDITOR
         Ray r = arCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit o;
         if (Physics.Raycast(r, out o))
@@ -69,6 +70,7 @@ public class PlacementManager : MonoBehaviour
                 ChangeSelectedObject(placementObject);
             }
         }
+#endif
 
         // Touch Screen
 
@@ -92,6 +94,13 @@ public class PlacementManager : MonoBehaviour
                             // No need to create new object, since I'm just selecting existing one.
                             break;
                         }
+
+                    }
+                    else
+                    {
+                        // Clear selected object & dismiss Annocation UI
+                        ClearSelection();
+                        uIManager.UpdateUIAccordingToSelectedObject();
                     }
 
                     // Place objects on AR plane
@@ -162,7 +171,6 @@ public class PlacementManager : MonoBehaviour
         {
             yield return new WaitForSeconds(0.1f);
             i++;
-            Debug.Log(i);
         } while ((touch.phase == TouchPhase.Stationary || (touch.phase == TouchPhase.Moved && touch.deltaPosition.magnitude < 0.5f)) && i < 5);
         if (i == 5)
         {
@@ -196,7 +204,11 @@ public class PlacementManager : MonoBehaviour
 
     void ClearSelection()
     {
-        if (lastSelectedObject != null) lastSelectedObject.IsSelected = false;
+        if (lastSelectedObject != null)
+        {
+            lastSelectedObject.IsSelected = false;
+            lastSelectedObject.GetComponent<Outline>().enabled = false;
+        }
         lastSelectedObject = null;
     }
 

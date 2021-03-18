@@ -12,61 +12,79 @@ public class SpeechManager : MonoBehaviour
     [SerializeField]
     Text speechText;
     AudioClip myAudioClip;
-    void Start() {
+    [SerializeField]
+    PlacementManager placementManager;
+    void Start()
+    {
         Setup(LANG_CODE);
-        #if UNITY_ANDROID
-            SpeechToText.instance.onPartialResultsCallback = OnPartialSpeechResult;
-        #endif
+#if UNITY_ANDROID
+        SpeechToText.instance.onPartialResultsCallback = OnPartialSpeechResult;
+#endif
         SpeechToText.instance.onResultCallback = OnFinalSpeechResult;
         TextToSpeech.instance.onStartCallBack = OnSpeakStart;
         TextToSpeech.instance.onDoneCallback = OnSpeakStop;
 
         Checkpermission();
     }
-    void Checkpermission() {
-        #if UNITY_ANDROID
-            if(!Permission.HasUserAuthorizedPermission(Permission.Microphone)) {
-                Permission.RequestUserPermission(Permission.Microphone);
-            }
-        #endif
+    void Checkpermission()
+    {
+#if UNITY_ANDROID
+        if (!Permission.HasUserAuthorizedPermission(Permission.Microphone))
+        {
+            Permission.RequestUserPermission(Permission.Microphone);
+        }
+#endif
     }
 
     #region Text to Speech
-    public void StartSpeaking(string msg) {
+    public void StartSpeaking(string msg)
+    {
         TextToSpeech.instance.StartSpeak(msg);
     }
-    public void StopSpeaking() {
+    public void StopSpeaking()
+    {
         TextToSpeech.instance.StopSpeak();
     }
-    void OnSpeakStart() {
+    void OnSpeakStart()
+    {
         Debug.Log("Speaking started...");
     }
-    void OnSpeakStop() {
+    void OnSpeakStop()
+    {
         Debug.Log("Speaking stopped...");
     }
     #endregion
 
     #region Speech to Text
-    public void StartListening() {
+    public void StartListening()
+    {
         //myAudioClip =  Microphone.Start(null, false, 100, 44100);
         SpeechToText.instance.StartRecording();
         Debug.Log("Listening started...");
     }
-    public void StopListening() {
+    public void StopListening()
+    {
         SpeechToText.instance.StopRecording();
         int lastTime = Microphone.GetPosition(null);
         //SavWav.Save("myfile", SavWav.TrimSilence(myAudioClip, (float)lastTime / 60f));
         Debug.Log("Listening stopped..." + lastTime + " seconds");
     }
-    void OnFinalSpeechResult(string result) {
+    void OnFinalSpeechResult(string result)
+    {
         speechText.text = result;
+        if (placementManager.lastSelectedObject != null)
+        {
+            placementManager.lastSelectedObject.annotation.reminderText = result;
+        }
     }
-    void OnPartialSpeechResult(string result) {
+    void OnPartialSpeechResult(string result)
+    {
         speechText.text = result;
     }
     #endregion
-    
-    void Setup(string code) {
+
+    void Setup(string code)
+    {
         SpeechToText.instance.Setting(code);
         TextToSpeech.instance.Setting(code, 1, 1);
     }

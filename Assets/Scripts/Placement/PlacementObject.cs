@@ -63,6 +63,7 @@ public class PlacementObject : MonoBehaviour, ISaveable
     {
         public Boolean isReminderActive;
         public Boolean isScheduleActive;
+        public string reminderText;
     }
 
     /// <summary>

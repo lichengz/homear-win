@@ -55,7 +55,15 @@ public class UIManager : MonoBehaviour
 
     public void SwitchSpeechUI()
     {
-        SpeechUI.gameObject.SetActive(!SpeechUI.gameObject.activeInHierarchy);
+        // SpeechUI.gameObject.SetActive(!SpeechUI.gameObject.activeInHierarchy);
+        if (placementManager.lastSelectedObject == null)
+        {
+            return;
+        }
+        else
+        {
+            SpeechUI.gameObject.SetActive(!SpeechUI.gameObject.activeInHierarchy);
+        }
     }
     public void SwitchPlacementUI()
     {
@@ -90,6 +98,11 @@ public class UIManager : MonoBehaviour
 
     public void UpdateUIAccordingToSelectedObject()
     {
+        if (placementManager.lastSelectedObject == null)
+        {
+            UpdateAnnotationUI(new PlacementObject.Annotation());
+            return;
+        }
         UpdateManipUI();
         UpdateAnnotationUI(placementManager.lastSelectedObject.annotation);
     }
