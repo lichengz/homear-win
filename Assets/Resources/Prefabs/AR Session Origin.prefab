@@ -218,6 +218,9 @@ MonoBehaviour:
   placePrefab: {fileID: 2321044263383519580, guid: 354191d962e0d194c9a61eae3ec6436b,
     type: 3}
   placedObjects: []
+  lastSelectedObject: {fileID: 0}
+  placementObjectEvent: {fileID: 11400000, guid: 335bbdca4eeed7f4e930c80571e72586,
+    type: 2}
   activeColor: {r: 1, g: 0, b: 0, a: 1}
   inactiveColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   arCamera: {fileID: 7843536570097917959}

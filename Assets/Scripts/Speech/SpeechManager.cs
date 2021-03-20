@@ -5,15 +5,18 @@ using UnityEngine;
 using TextSpeech;
 using UnityEngine.UI;
 using UnityEngine.Android;
+using HomeAR.Events;
 
 public class SpeechManager : MonoBehaviour
 {
     const string LANG_CODE = "en-US";
-    [SerializeField]
-    Text speechText;
+    // [SerializeField]
+    // Text speechText;
     AudioClip myAudioClip;
+    // [SerializeField]
+    // PlacementManager placementManager;
     [SerializeField]
-    PlacementManager placementManager;
+    StringEvent onFinalSpeechResult;
     void Start()
     {
         Setup(LANG_CODE);
@@ -26,6 +29,15 @@ public class SpeechManager : MonoBehaviour
 
         Checkpermission();
     }
+#if UNITY_EDITOR
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            onFinalSpeechResult.Raise("Broadcasting...");
+        }
+    }
+#endif
     void Checkpermission()
     {
 #if UNITY_ANDROID
@@ -71,15 +83,17 @@ public class SpeechManager : MonoBehaviour
     }
     void OnFinalSpeechResult(string result)
     {
-        speechText.text = result;
-        if (placementManager.lastSelectedObject != null)
-        {
-            placementManager.lastSelectedObject.annotation.reminderText = result;
-        }
+        onFinalSpeechResult.Raise(result);
+        // speechText.text = result;
+        // if (placementManager.lastSelectedObject != null)
+        // {
+        //     placementManager.lastSelectedObject.annotation.reminderText = result;
+        // }
     }
     void OnPartialSpeechResult(string result)
     {
-        speechText.text = result;
+        onFinalSpeechResult.Raise(result);
+        // speechText.text = result;
     }
     #endregion
 

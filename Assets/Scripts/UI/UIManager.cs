@@ -10,6 +10,8 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     Canvas SpeechUI;
     [SerializeField]
+    Text speechText;
+    [SerializeField]
     Canvas PlacementUI;
     [SerializeField]
     Canvas ManipUI;
@@ -79,9 +81,9 @@ public class UIManager : MonoBehaviour
         ManipUI.gameObject.SetActive(!ManipUI.gameObject.activeInHierarchy);
     }
 
-    private void UpdateManipUI()
+    private void UpdateManipUI(PlacementObject selectedObject)
     {
-        ManipUI.GetComponentInChildren<Slider>().value = placementManager.lastSelectedObject.curScale;
+        ManipUI.GetComponentInChildren<Slider>().value = selectedObject.curScale;
     }
 
     public void ManipScale()
@@ -96,14 +98,21 @@ public class UIManager : MonoBehaviour
         AnnotationUI.transform.GetChild(0).GetChild(1).gameObject.SetActive(anno.isScheduleActive);
     }
 
-    public void UpdateUIAccordingToSelectedObject()
+    public void UpdateUIAccordingToSelectedObject(PlacementObject selectedObject)
     {
-        if (placementManager.lastSelectedObject == null)
+        if (selectedObject == null)
         {
             UpdateAnnotationUI(new PlacementObject.Annotation());
             return;
         }
-        UpdateManipUI();
-        UpdateAnnotationUI(placementManager.lastSelectedObject.annotation);
+        UpdateManipUI(selectedObject);
+        UpdateAnnotationUI(selectedObject.annotation);
     }
+
+    // ----------------- Speech -----------------------------
+    public void UpdateSpeechPanel(string result)
+    {
+        speechText.text = result;
+    }
+    // ----------------- Speech -----------------------------
 }

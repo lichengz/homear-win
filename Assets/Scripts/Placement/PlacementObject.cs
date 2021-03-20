@@ -8,8 +8,8 @@ public class PlacementObject : MonoBehaviour, ISaveable
 {
     [SerializeField]
     bool Selected;
-    public Vector3 oriScale { get; set; }
-    public int curScale { get; set; }
+    public Vector3 oriScale;
+    public int curScale;
     public bool IsSelected
     {
         get
@@ -55,6 +55,7 @@ public class PlacementObject : MonoBehaviour, ISaveable
         public SerializableVector3 position;
         public SerializableVector3 rotation;
         public SerializableVector3 scale;
+        public Annotation annotation;
     }
 
     // Annotation
@@ -71,6 +72,7 @@ public class PlacementObject : MonoBehaviour, ISaveable
     /// </summary>
     void Awake()
     {
+        oriScale = transform.localScale;
         OverLayTextMesh = GetComponentInChildren<TextMeshPro>();
         if (OverLayTextMesh != null)
         {
@@ -87,7 +89,8 @@ public class PlacementObject : MonoBehaviour, ISaveable
         {
             position = new SerializableVector3(transform.position),
             rotation = new SerializableVector3(transform.localEulerAngles),
-            scale = new SerializableVector3(transform.localScale)
+            scale = new SerializableVector3(transform.localScale),
+            annotation = this.annotation
         };
     }
 
@@ -97,6 +100,13 @@ public class PlacementObject : MonoBehaviour, ISaveable
         transform.position = saveData.position.restore();
         transform.localEulerAngles = saveData.rotation.restore();
         transform.localScale = saveData.scale.restore();
+        this.annotation = saveData.annotation;
+    }
+
+    public void CaptureSpeech(string speech)
+    {
+        if (!IsSelected) return;
+        annotation.reminderText = speech;
     }
 
 }

@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 using UnityEngine.UI;
+using HomeAR.Events;
 
 [RequireComponent(typeof(ARRaycastManager))]
 public class PlacementManager : MonoBehaviour
@@ -14,6 +15,8 @@ public class PlacementManager : MonoBehaviour
     [SerializeField]
     PlacementObject[] placedObjects;
     public PlacementObject lastSelectedObject;
+    [SerializeField]
+    PlacementObjectEvent placementObjectEvent;
     [SerializeField]
     Color activeColor = Color.red;
     [SerializeField]
@@ -100,7 +103,7 @@ public class PlacementManager : MonoBehaviour
                     {
                         // Clear selected object & dismiss Annocation UI
                         ClearSelection();
-                        uIManager.UpdateUIAccordingToSelectedObject();
+                        // uIManager.UpdateUIAccordingToSelectedObject();
                     }
 
                     // Place objects on AR plane
@@ -110,7 +113,7 @@ public class PlacementManager : MonoBehaviour
                         lastSelectedObject = Instantiate(placePrefab, hitPose.position, hitPose.rotation).GetComponent<PlacementObject>();
                         // placedObjects = FindObjectsOfType<PlacementObject>();
                         ChangeSelectedObject(lastSelectedObject);
-                        lastSelectedObject.oriScale = lastSelectedObject.transform.localScale;
+                        // lastSelectedObject.oriScale = lastSelectedObject.transform.localScale;
                         Debug.Log("Place instantiated");
                     }
                     break;
@@ -197,9 +200,10 @@ public class PlacementManager : MonoBehaviour
                 cur.IsSelected = true;
                 // meshRenderer.material.color = activeColor;
                 cur.GetComponent<Outline>().enabled = true;
+                placementObjectEvent.Raise(cur);
             }
         }
-        uIManager.UpdateUIAccordingToSelectedObject();
+        // uIManager.UpdateUIAccordingToSelectedObject();
     }
 
     void ClearSelection()
