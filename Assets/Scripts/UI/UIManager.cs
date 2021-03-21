@@ -20,6 +20,8 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     Canvas AnnotationUI;
     [SerializeField]
+    Text reminderText;
+    [SerializeField]
     ARPlaneManager aRPlaneManager;
     [SerializeField]
     PlacementManager placementManager;
@@ -33,6 +35,7 @@ public class UIManager : MonoBehaviour
         PlacementUI.gameObject.SetActive(false);
         ManipUI.gameObject.SetActive(false);
         aRPlaneManager.enabled = false;
+        UpdateAnnotationUI(new PlacementObject.Annotation());
     }
     // Start is called before the first frame update
     void Start()
@@ -96,6 +99,7 @@ public class UIManager : MonoBehaviour
     {
         AnnotationUI.transform.GetChild(0).GetChild(0).gameObject.SetActive(anno.isReminderActive);
         AnnotationUI.transform.GetChild(0).GetChild(1).gameObject.SetActive(anno.isScheduleActive);
+        reminderText.text = anno.reminderText;
     }
 
     public void UpdateUIAccordingToSelectedObject(PlacementObject selectedObject)
