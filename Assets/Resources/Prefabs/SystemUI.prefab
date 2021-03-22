@@ -846,6 +846,7 @@ GameObject:
   - component: {fileID: 8860085249312751886}
   - component: {fileID: 8860085249312751890}
   - component: {fileID: 1968368630}
+  - component: {fileID: 1086425277}
   m_Layer: 5
   m_Name: SystemUI
   m_TagString: Untagged
@@ -954,8 +955,8 @@ MonoBehaviour:
   ManipUI: {fileID: 0}
   ScaleText: {fileID: 0}
   AnnotationUI: {fileID: 0}
+  reminderText: {fileID: 0}
   aRPlaneManager: {fileID: 0}
-  placementManager: {fileID: 0}
 --- !u!114 &1968368630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -974,6 +975,33 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8860085249312751890}
         m_MethodName: UpdateSpeechPanel
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1086425277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8860085249312751887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a4780269059b1343890137e57b5c8bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 335bbdca4eeed7f4e930c80571e72586, type: 2}
+  unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8860085249312751890}
+        m_MethodName: UpdateUIAccordingToSelectedObject
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

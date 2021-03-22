@@ -10,6 +10,7 @@ using HomeAR.Events;
 [RequireComponent(typeof(ARRaycastManager))]
 public class PlacementManager : MonoBehaviour
 {
+    public static PlacementManager Instance { get; private set; }
     [SerializeField]
     GameObject placePrefab;
     [SerializeField]
@@ -42,8 +43,6 @@ public class PlacementManager : MonoBehaviour
     Button CubeButton;
     [SerializeField]
     Button BallButton;
-    [SerializeField]
-    UIManager uIManager;
     Touch touch;
     bool manipCanvasOpening = false;
 
@@ -52,6 +51,15 @@ public class PlacementManager : MonoBehaviour
     /// </summary>
     void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
         aRRaycastManager = GetComponent<ARRaycastManager>();
         CubeButton.onClick.AddListener(() => ChangePrefabTo("Cube"));
         BallButton.onClick.AddListener(() => ChangePrefabTo("Ball"));
@@ -60,7 +68,7 @@ public class PlacementManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (uIManager.isUIactive()) return;
+        if (UIManager.Instance.isUIactive()) return;
         // Select in editor
 #if UNITY_EDITOR
         Ray r = arCamera.ScreenPointToRay(Input.mousePosition);
@@ -177,7 +185,7 @@ public class PlacementManager : MonoBehaviour
         } while ((touch.phase == TouchPhase.Stationary || (touch.phase == TouchPhase.Moved && touch.deltaPosition.magnitude < 0.5f)) && i < 5);
         if (i == 5)
         {
-            uIManager.SwitchManipUI();
+            UIManager.Instance.SwitchManipUI();
         }
         manipCanvasOpening = false;
     }

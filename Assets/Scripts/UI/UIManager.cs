@@ -7,6 +7,7 @@ using UnityEngine.XR.ARSubsystems;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager Instance { get; private set; }
     [SerializeField]
     Canvas SpeechUI;
     [SerializeField]
@@ -23,14 +24,23 @@ public class UIManager : MonoBehaviour
     Text reminderText;
     [SerializeField]
     ARPlaneManager aRPlaneManager;
-    [SerializeField]
-    PlacementManager placementManager;
+    // [SerializeField]
+    // PlacementManager placementManager;
 
     /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>
     void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
         SpeechUI.gameObject.SetActive(false);
         PlacementUI.gameObject.SetActive(false);
         ManipUI.gameObject.SetActive(false);
@@ -61,7 +71,7 @@ public class UIManager : MonoBehaviour
     public void SwitchSpeechUI()
     {
         // SpeechUI.gameObject.SetActive(!SpeechUI.gameObject.activeInHierarchy);
-        if (placementManager.lastSelectedObject == null)
+        if (PlacementManager.Instance.lastSelectedObject == null)
         {
             return;
         }
@@ -92,7 +102,7 @@ public class UIManager : MonoBehaviour
     public void ManipScale()
     {
         int offset = (int)ManipUI.GetComponentInChildren<Slider>().value;
-        placementManager.ScaleSelectedObject(offset);
+        PlacementManager.Instance.ScaleSelectedObject(offset);
         ScaleText.text = string.Format("Scale:{0:0.0}", 1.0f + offset / 10f);
     }
     private void UpdateAnnotationUI(PlacementObject.Annotation anno)

@@ -10,13 +10,12 @@ using ZXing;
 /// </summary>
 public class ReadQRCode : MonoBehaviour
 {
-    public QRManager qRManager;
     public Camera ARCamera;
     public Camera QRCamera;
-    
+
     private bool grabQR;
     private bool cameraInitialized;
-    
+
     /// <summary>
     /// Match the Unity camera used for QR Code scanning with the one used by ARFoundation 
     /// </summary>
@@ -41,7 +40,7 @@ public class ReadQRCode : MonoBehaviour
             grabQR = true;
         }
     }
-    
+
     /// <summary>
     /// Scan QRCode using ZXing
     /// </summary>
@@ -64,8 +63,10 @@ public class ReadQRCode : MonoBehaviour
                 if (result != null)
                 {
                     Debug.Log("QR Text:" + result.Text);
-                    qRManager.UpdateScanResult(result.Text);
-                } else {
+                    QRManager.Instance.UpdateScanResult(result.Text);
+                }
+                else
+                {
                     Debug.Log("NO QR code found");
                 }
             }

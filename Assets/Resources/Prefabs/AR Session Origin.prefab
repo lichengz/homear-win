@@ -226,7 +226,6 @@ MonoBehaviour:
   arCamera: {fileID: 7843536570097917959}
   CubeButton: {fileID: 0}
   BallButton: {fileID: 0}
-  uIManager: {fileID: 0}
 --- !u!114 &4707618652411525749
 MonoBehaviour:
   m_ObjectHideFlags: 0

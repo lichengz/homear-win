@@ -1070,7 +1070,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83e65d4ac85bf5d4ab21f865c9fb9504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speechManager: {fileID: 0}
   effect: {fileID: 7665966718373855179}
   speedEffect: 1
   scaleEffect: 1.2

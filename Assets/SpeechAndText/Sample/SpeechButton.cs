@@ -7,7 +7,6 @@ using UnityEngine.Events;
 public class SpeechButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     // public SampleSpeechToText sample;
-    public SpeechManager speechManager;
     public GameObject effect;
     public float speedEffect = 1;
     public float scaleEffect = 1.2f;
@@ -41,13 +40,13 @@ public class SpeechButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         effect.SetActive(true);
         scale = 1;
         //sample.StartRecording();
-        speechManager.StartListening();
+        SpeechManager.Instance.StartListening();
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
         effect.SetActive(false);
         //sample.StopRecording();
-        speechManager.StopListening();
+        SpeechManager.Instance.StopListening();
     }
 }

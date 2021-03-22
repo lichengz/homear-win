@@ -6,24 +6,18 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public class SavingManager : MonoBehaviour
 {
+    public static SavingManager Instance { get; private set; }
     string savePath => $"{Application.persistentDataPath}/save";
-    public static SavingManager instance;
-    /// <summary>
-    /// Awake is called when the script instance is being loaded.
-    /// </summary>
-    [SerializeField]
-    Object placementObject;
     void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
-
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
-        else if (instance != this)
+        else
         {
-            Destroy(this);
-            DontDestroyOnLoad(this);
+            Destroy(gameObject);
         }
     }
 

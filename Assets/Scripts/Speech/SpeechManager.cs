@@ -9,6 +9,7 @@ using HomeAR.Events;
 
 public class SpeechManager : MonoBehaviour
 {
+    public static SpeechManager Instance { get; private set; }
     const string LANG_CODE = "en-US";
     // [SerializeField]
     // Text speechText;
@@ -17,6 +18,18 @@ public class SpeechManager : MonoBehaviour
     // PlacementManager placementManager;
     [SerializeField]
     StringEvent onFinalSpeechResult;
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     void Start()
     {
         Setup(LANG_CODE);
