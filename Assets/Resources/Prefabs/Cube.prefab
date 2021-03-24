@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5969375747382572051}
   - component: {fileID: 3281372996916016061}
   - component: {fileID: 285559864}
+  - component: {fileID: 2118523761}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -110,6 +111,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Selected: 0
+  oriScale: {x: 0, y: 0, z: 0}
+  curScale: 0
+  annotation:
+    isReminderActive: 0
+    isScheduleActive: 1
+    reminderText: 
   OverLayTextMesh: {fileID: 0}
   OverLayText: 
 --- !u!114 &3281372996916016061
@@ -142,7 +149,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82dd63b17a3f02e498b625b139bdeacb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: e3821048-3a2f-488c-a0df-5a2b1e393af2
+  id: a9176790-b1e2-4cd1-9ca1-fc82e9958a76
+--- !u!114 &2118523761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2321044263383519580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4634356e0d040c84b9330dabe8678777, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 07ad7e685079b374e957142b94d53115, type: 2}
+  unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5969375747382572051}
+        m_MethodName: CaptureSpeech
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4858309236368797781
 GameObject:
   m_ObjectHideFlags: 0

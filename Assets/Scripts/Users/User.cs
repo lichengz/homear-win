@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class User
 {
-    int index;
-    string name;
+    public int index;
+    public string name;
 
     public User(int index, string name)
     {

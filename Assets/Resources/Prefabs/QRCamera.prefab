@@ -96,6 +96,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e15ffd96fa21840fab0de0672170230d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  qRManager: {fileID: 0}
   ARCamera: {fileID: 0}
   QRCamera: {fileID: 6266215400427270520}
