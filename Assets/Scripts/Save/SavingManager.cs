@@ -19,6 +19,12 @@ public class SavingManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        LoadGame();
+    }
+
+    void OnApplicationQuit()
+    {
+        SaveGame();
     }
 
     public void SaveGame()

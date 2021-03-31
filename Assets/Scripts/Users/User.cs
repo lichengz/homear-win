@@ -13,4 +13,9 @@ public class User
         this.index = index;
         this.name = name;
     }
+    public User()
+    {
+        this.index = -1;
+        this.name = "I am no one";
+    }
 }

@@ -65,6 +65,7 @@ public class PlacementObject : MonoBehaviour, ISaveable
         public Boolean isReminderActive;
         public Boolean isScheduleActive;
         public string reminderText;
+        public Schedule schedule;
     }
 
     /// <summary>
@@ -107,6 +108,23 @@ public class PlacementObject : MonoBehaviour, ISaveable
     {
         if (!IsSelected) return;
         annotation.reminderText = speech;
+        annotation.isReminderActive = true;
+        UIManager.Instance.UpdateAnnotationUI(annotation);
+    }
+
+    public void UpdateAnnotaionStatus()
+    {
+        foreach (User user in annotation.schedule.slots)
+        {
+            if (user.index != -1)
+            {
+                annotation.isScheduleActive = true;
+                UIManager.Instance.UpdateAnnotationUI(annotation);
+                return;
+            }
+        }
+        annotation.isScheduleActive = false;
+        UIManager.Instance.UpdateAnnotationUI(annotation);
     }
 
 }

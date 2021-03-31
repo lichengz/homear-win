@@ -8,16 +8,22 @@ namespace HomeAR.Managers
 {
     public class GameManager : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
+        public static GameManager Instance { get; private set; }
+        public int numOfScheduleSlots = 6;
+        /// <summary>
+        /// Awake is called when the script instance is being loaded.
+        /// </summary>
+        void Awake()
         {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
+            if (Instance == null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
 
         public void LoadGameScene()

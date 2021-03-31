@@ -24,8 +24,12 @@ public class UIManager : MonoBehaviour
     Text reminderText;
     [SerializeField]
     ARPlaneManager aRPlaneManager;
-    // [SerializeField]
-    // PlacementManager placementManager;
+    [SerializeField]
+    GameObject scheduleSlotPrefab;
+    [SerializeField]
+    Transform scheduleSlotContainer;
+    [SerializeField]
+    GameObject SchedulePanel;
 
     /// <summary>
     /// Awake is called when the script instance is being loaded.
@@ -105,7 +109,8 @@ public class UIManager : MonoBehaviour
         PlacementManager.Instance.ScaleSelectedObject(offset);
         ScaleText.text = string.Format("Scale:{0:0.0}", 1.0f + offset / 10f);
     }
-    private void UpdateAnnotationUI(PlacementObject.Annotation anno)
+    // ----------------- Annotation -----------------------------
+    public void UpdateAnnotationUI(PlacementObject.Annotation anno)
     {
         AnnotationUI.transform.GetChild(0).GetChild(0).gameObject.SetActive(anno.isReminderActive);
         AnnotationUI.transform.GetChild(0).GetChild(1).gameObject.SetActive(anno.isScheduleActive);
@@ -122,6 +127,7 @@ public class UIManager : MonoBehaviour
         UpdateManipUI(selectedObject);
         UpdateAnnotationUI(selectedObject.annotation);
     }
+    // ----------------- Annotation -----------------------------
 
     // ----------------- Speech -----------------------------
     public void UpdateSpeechPanel(string result)
@@ -129,4 +135,62 @@ public class UIManager : MonoBehaviour
         speechText.text = result;
     }
     // ----------------- Speech -----------------------------
+
+    // ----------------- Schedule -----------------------------
+    public void InitSchedulePanel()
+    {
+        if (SchedulePanel.activeInHierarchy)
+        {
+            return;
+        }
+        foreach (Transform child in scheduleSlotContainer)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
+        SchedulePanel.SetActive(true);
+        Schedule scheduleOfSelectedObject = PlacementManager.Instance.lastSelectedObject.annotation.schedule;
+        PlacementManager.Instance.lastSelectedObject.UpdateAnnotaionStatus();
+        for (int i = 0; i < UserManager.numOfScheduleSlots; i++)
+        {
+            GameObject slot = Instantiate(scheduleSlotPrefab, Vector3.zero, Quaternion.identity);
+            int tmp = i;
+            slot.GetComponent<Button>().onClick.AddListener(() => InsertScheduleSlot(tmp));
+            slot.transform.SetParent(scheduleSlotContainer);
+            if (scheduleOfSelectedObject.slots[i].index == -1)
+            {
+                slot.GetComponentInChildren<Text>().text = "Empty";
+            }
+            else
+            {
+                slot.GetComponentInChildren<Text>().text = scheduleOfSelectedObject.slots[i].name;
+            }
+        }
+    }
+
+    public void UpdateSchedulePanel()
+    {
+        Schedule scheduleOfSelectedObject = PlacementManager.Instance.lastSelectedObject.annotation.schedule;
+        PlacementManager.Instance.lastSelectedObject.UpdateAnnotaionStatus();
+        for (int i = 0; i < UserManager.numOfScheduleSlots; i++)
+        {
+            GameObject slot = scheduleSlotContainer.GetChild(i).gameObject;
+            if (scheduleOfSelectedObject.slots[i].index == -1)
+            {
+                slot.GetComponentInChildren<Text>().text = "Empty";
+            }
+            else
+            {
+                slot.GetComponentInChildren<Text>().text = scheduleOfSelectedObject.slots[i].name;
+            }
+        }
+    }
+
+    public void InsertScheduleSlot(int index)
+    {
+        Debug.Log("Trying to insert at slot " + index);
+        PlacementManager.Instance.lastSelectedObject.annotation.schedule.InsertSlot(index);
+        PlacementManager.Instance.lastSelectedObject.UpdateAnnotaionStatus();
+        UpdateSchedulePanel();
+    }
+    // ----------------- Schedule -----------------------------
 }
