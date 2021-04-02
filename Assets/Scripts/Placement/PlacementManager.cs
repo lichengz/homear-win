@@ -12,6 +12,8 @@ public class PlacementManager : MonoBehaviour
 {
     public static PlacementManager Instance { get; private set; }
     [SerializeField]
+    GameObject placementIndicator;
+    [SerializeField]
     GameObject placePrefab;
     [SerializeField]
     PlacementObject[] placedObjects;
@@ -27,6 +29,7 @@ public class PlacementManager : MonoBehaviour
     ARRaycastManager aRRaycastManager;
     Vector2 touchPosition = default;
     static List<ARRaycastHit> hits = new List<ARRaycastHit>();
+    private Pose placementPose;
     public GameObject PlacedPrefab
     {
         get
@@ -83,6 +86,23 @@ public class PlacementManager : MonoBehaviour
         }
 #endif
 
+        // Update Placement Indicator
+        aRRaycastManager.Raycast(new Vector2(Screen.width / 2, Screen.height / 2), hits, TrackableType.Planes);
+
+        // if we hit an AR plane surface, update the position and rotation
+        if (hits.Count > 0)
+        {
+            placementIndicator.transform.position = hits[0].pose.position;
+            placementIndicator.transform.rotation = hits[0].pose.rotation;
+
+            // enable the visual if it's disabled
+            if (!placementIndicator.transform.GetChild(0).gameObject.activeInHierarchy) placementIndicator.transform.GetChild(0).gameObject.SetActive(true);
+            placementPose = hits[0].pose;
+            var cameraForward = Camera.current.transform.forward;
+            var cameraBearing = new Vector3(cameraForward.x, 0, cameraForward.z).normalized;
+            placementPose.rotation = Quaternion.LookRotation(cameraBearing);
+        }
+
         // Touch Screen
 
         if (Input.touchCount > 0)
@@ -115,12 +135,12 @@ public class PlacementManager : MonoBehaviour
                     }
 
                     // Place objects on AR plane
-                    if (aRRaycastManager.Raycast(touchPosition, hits, TrackableType.PlaneWithinPolygon))
+                    if (aRRaycastManager.Raycast(touchPosition, hits, TrackableType.Planes))
                     {
                         var hitPose = hits[0].pose;
-                        lastSelectedObject = Instantiate(placePrefab, hitPose.position, hitPose.rotation).GetComponent<PlacementObject>();
+                        lastSelectedObject = Instantiate(placePrefab, placementPose.position, placementPose.rotation).GetComponent<PlacementObject>();
                         // placedObjects = FindObjectsOfType<PlacementObject>();
-                        ChangeSelectedObject(lastSelectedObject);
+                        //ChangeSelectedObject(lastSelectedObject);
                         // lastSelectedObject.oriScale = lastSelectedObject.transform.localScale;
                         Debug.Log("Place instantiated");
                     }
@@ -142,7 +162,7 @@ public class PlacementManager : MonoBehaviour
 
                 case TouchPhase.Moved:
                     if (manipCanvasOpening) break;
-                    if (aRRaycastManager.Raycast(touchPosition, hits, TrackableType.PlaneWithinPolygon))
+                    if (aRRaycastManager.Raycast(touchPosition, hits, TrackableType.Planes))
                     {
                         // Dragging
                         var hitPose = hits[0].pose;

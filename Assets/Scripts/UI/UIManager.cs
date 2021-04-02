@@ -48,7 +48,7 @@ public class UIManager : MonoBehaviour
         SpeechUI.gameObject.SetActive(false);
         PlacementUI.gameObject.SetActive(false);
         ManipUI.gameObject.SetActive(false);
-        aRPlaneManager.enabled = false;
+        // aRPlaneManager.enabled = false;
         UpdateAnnotationUI(new PlacementObject.Annotation());
     }
     // Start is called before the first frame update
@@ -87,11 +87,11 @@ public class UIManager : MonoBehaviour
     public void SwitchPlacementUI()
     {
         PlacementUI.gameObject.SetActive(!PlacementUI.gameObject.activeInHierarchy);
-        aRPlaneManager.enabled = !aRPlaneManager.enabled;
-        foreach (ARPlane plane in aRPlaneManager.trackables)
-        {
-            plane.gameObject.SetActive(aRPlaneManager.enabled);
-        }
+        // aRPlaneManager.enabled = !aRPlaneManager.enabled;
+        // foreach (ARPlane plane in aRPlaneManager.trackables)
+        // {
+        //     plane.gameObject.SetActive(aRPlaneManager.enabled);
+        // }
     }
     public void SwitchManipUI()
     {

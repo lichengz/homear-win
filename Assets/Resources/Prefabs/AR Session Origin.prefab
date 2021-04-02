@@ -183,12 +183,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7843536570245144412}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e1760703bbd54c04488a8d10600262ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PlanePrefab: {fileID: 4617925906250193355, guid: f779d56b9fa56e44cb5036537e09db36,
+  m_PlanePrefab: {fileID: 8888765422958132685, guid: 4273ed43790fa66439225406cf3fa586,
     type: 3}
   m_DetectionMode: -1
 --- !u!114 &1165422792
@@ -215,6 +215,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f374db2933844347a588068328bdfec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  placementIndicator: {fileID: 726527287472277516, guid: 657313ed37665534ca96076d14a7b760,
+    type: 3}
   placePrefab: {fileID: 2321044263383519580, guid: 354191d962e0d194c9a61eae3ec6436b,
     type: 3}
   placedObjects: []
@@ -233,7 +235,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7843536570245144412}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ab0e80cee9cc1d44928bfe488dd1e2d, type: 3}
   m_Name: 

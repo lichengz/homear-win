@@ -121,6 +121,81 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &125711716
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 726527287472277516, guid: 657313ed37665534ca96076d14a7b760,
+        type: 3}
+      propertyPath: m_Name
+      value: PlacementIndicator
+      objectReference: {fileID: 0}
+    - target: {fileID: 726527287472277517, guid: 657313ed37665534ca96076d14a7b760,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 726527287472277517, guid: 657313ed37665534ca96076d14a7b760,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726527287472277517, guid: 657313ed37665534ca96076d14a7b760,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726527287472277517, guid: 657313ed37665534ca96076d14a7b760,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726527287472277517, guid: 657313ed37665534ca96076d14a7b760,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 726527287472277517, guid: 657313ed37665534ca96076d14a7b760,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726527287472277517, guid: 657313ed37665534ca96076d14a7b760,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726527287472277517, guid: 657313ed37665534ca96076d14a7b760,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726527287472277517, guid: 657313ed37665534ca96076d14a7b760,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726527287472277517, guid: 657313ed37665534ca96076d14a7b760,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726527287472277517, guid: 657313ed37665534ca96076d14a7b760,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 657313ed37665534ca96076d14a7b760, type: 3}
+--- !u!1 &125711717 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 726527287472277516, guid: 657313ed37665534ca96076d14a7b760,
+    type: 3}
+  m_PrefabInstance: {fileID: 125711716}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &285559862
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1595,6 +1670,10 @@ PrefabInstance:
       propertyPath: lastSelectedObject
       value: 
       objectReference: {fileID: 1196915244}
+    - target: {fileID: 1165422789, guid: ea52605926b3e7b4896c4bb8f612b044, type: 3}
+      propertyPath: placementIndicator
+      value: 
+      objectReference: {fileID: 125711717}
     - target: {fileID: 7843536570245144412, guid: ea52605926b3e7b4896c4bb8f612b044,
         type: 3}
       propertyPath: m_Name
@@ -1654,6 +1733,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7843536570245144415, guid: ea52605926b3e7b4896c4bb8f612b044,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7843536570245144415, guid: ea52605926b3e7b4896c4bb8f612b044,
+        type: 3}
+      propertyPath: m_PlanePrefab
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea52605926b3e7b4896c4bb8f612b044, type: 3}
