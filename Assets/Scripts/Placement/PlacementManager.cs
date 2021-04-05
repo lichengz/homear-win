@@ -11,6 +11,7 @@ using HomeAR.Events;
 public class PlacementManager : MonoBehaviour
 {
     public static PlacementManager Instance { get; private set; }
+    public Inventory inventory;
     [SerializeField]
     GameObject placementIndicator;
     [SerializeField]

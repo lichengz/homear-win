@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 525bf1a6d53b0224d93dcf366de70fdb, type: 3}
-  m_Name: Placement Object
+  m_Script: {fileID: 11500000, guid: 668c9dfa502c9a94ebdae4c463215316, type: 3}
+  m_Name: Inventory
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
-  position: {x: 0, y: 0, z: 0}
-  rotation: {x: 0, y: 0, z: 0, w: 0}
+  objectList:
+  - {fileID: 11400000, guid: 9c076bce3ea083346896b58b9aa2459b, type: 2}
+  - {fileID: 11400000, guid: 8dba864d9e178944883535bb828759d9, type: 2}
