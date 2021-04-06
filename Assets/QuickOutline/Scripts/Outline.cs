@@ -101,7 +101,7 @@ public class Outline : MonoBehaviour {
 
   void OnEnable() {
     foreach (var renderer in renderers) {
-
+      if(renderer.gameObject.name == "OverLayText") continue;
       // Append outline shaders
       var materials = renderer.sharedMaterials.ToList();
 

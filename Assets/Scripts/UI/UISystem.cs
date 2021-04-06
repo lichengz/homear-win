@@ -6,11 +6,10 @@ using DG.Tweening;
 
 public class UISystem : MonoBehaviour
 {
+    public static UISystem Instance { get; private set; }
     // Swipe & Object Panel
     Vector2 startTouchPos, endTouchPos;
     bool swipeUpDetected;
-    bool swipeDownDetected;
-
     int swipeThreshold = 300;
     [SerializeField]
     RectTransform mainPanel, objectPanel;
@@ -24,11 +23,19 @@ public class UISystem : MonoBehaviour
     /// </summary>
     void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
         screenWidth = Screen.width;
         screenHeight = Screen.height;
         mainPanel.anchoredPosition = new Vector2(-screenWidth, 0);
         objectPanel.anchoredPosition = new Vector2(0, -screenHeight);
-
     }
     // Start is called before the first frame update
     void Start()
@@ -47,11 +54,6 @@ public class UISystem : MonoBehaviour
             swipeUpDetected = false;
             ShowObjectPanel();
         }
-        if (swipeDownDetected)
-        {
-            swipeDownDetected = false;
-            DismissObjectPanel();
-        }
     }
 
     // ----------------- Object Panel -----------------------------
@@ -69,10 +71,6 @@ public class UISystem : MonoBehaviour
             {
                 swipeUpDetected = true;
             }
-            else if (startTouchPos.y - endTouchPos.y > swipeThreshold)
-            {
-                swipeDownDetected = true;
-            }
         }
 #else
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
@@ -86,10 +84,6 @@ public class UISystem : MonoBehaviour
             {
                 swipeUpDetected = true;
             }
-            else if (startTouchPos.y - endTouchPos.y > swipeThreshold)
-            {
-                swipeDownDetected = true;
-            }
         }
 #endif
     }
@@ -97,13 +91,13 @@ public class UISystem : MonoBehaviour
     public void ShowObjectPanel()
     {
         mainPanel.DOAnchorPos(new Vector2(-screenWidth, 0), animationDur);
-        objectPanel.DOAnchorPos(Vector2.zero, animationDur);
+        objectPanel.DOAnchorPos(Vector2.zero - new Vector2(0, Screen.height * 0.1f), animationDur);
     }
 
     public void DismissObjectPanel()
     {
         mainPanel.DOAnchorPos(Vector2.zero, animationDur);
-        objectPanel.DOAnchorPos(new Vector2(0, -screenHeight), animationDur);
+        objectPanel.DOAnchorPos(new Vector2(0, -Screen.height), animationDur);
     }
 
     public void InitObjectPanel()
@@ -121,8 +115,12 @@ public class UISystem : MonoBehaviour
     GameObject generateObjectSlotPrefab(Object placementObject)
     {
         GameObject go = Instantiate(objectSlotPrefab, Vector3.zero, Quaternion.identity);
-        go.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Image>().sprite = placementObject.icon;
-        go.transform.GetChild(0).GetChild(1).GetComponent<Text>().text = placementObject.text;
+        if (placementObject.prefab != null)
+        {
+            go.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Image>().sprite = placementObject.icon;
+            go.transform.GetChild(0).GetChild(1).GetComponent<Text>().text = placementObject.text;
+            go.GetComponent<Button>().onClick.AddListener(() => PlacementManager.Instance.ChangePrefabTo(placementObject.text));
+        }
         return go;
     }
     // ----------------- Object Panel -----------------------------

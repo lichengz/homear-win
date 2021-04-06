@@ -3,41 +3,11 @@
     "m_SelectedPackage": {
         "deviceId": "801KPMZ1409427",
         "name": "com.DefaultCompany.homear",
-        "processId": 1401,
+        "processId": 26620,
         "exited": false
     },
     "m_SelectedPriority": 0,
     "m_KnownPackagesForSerialization": [
-        {
-            "deviceId": "801KPMZ1409427",
-            "name": "com.DefaultCompany.homear",
-            "processId": 27738,
-            "exited": true
-        },
-        {
-            "deviceId": "801KPMZ1409427",
-            "name": "com.DefaultCompany.homear",
-            "processId": 5740,
-            "exited": true
-        },
-        {
-            "deviceId": "801KPMZ1409427",
-            "name": "com.DefaultCompany.homear",
-            "processId": 6858,
-            "exited": true
-        },
-        {
-            "deviceId": "801KPMZ1409427",
-            "name": "com.DefaultCompany.homear",
-            "processId": 7255,
-            "exited": true
-        },
-        {
-            "deviceId": "801KPMZ1409427",
-            "name": "com.DefaultCompany.homear",
-            "processId": 9810,
-            "exited": true
-        },
         {
             "deviceId": "801KPMZ1409427",
             "name": "com.google.android.apps.nexuslauncher",
@@ -47,37 +17,91 @@
         {
             "deviceId": "801KPMZ1409427",
             "name": "com.DefaultCompany.homear",
-            "processId": 22522,
-            "exited": false
-        },
-        {
-            "deviceId": "801KPMZ1409427",
-            "name": "com.DefaultCompany.homear",
-            "processId": 24314,
-            "exited": false
-        },
-        {
-            "deviceId": "801KPMZ1409427",
-            "name": "com.DefaultCompany.homear",
             "processId": 25267,
-            "exited": false
+            "exited": true
         },
         {
             "deviceId": "801KPMZ1409427",
             "name": "com.DefaultCompany.homear",
             "processId": 25986,
-            "exited": false
+            "exited": true
         },
         {
             "deviceId": "801KPMZ1409427",
             "name": "com.DefaultCompany.homear",
             "processId": 30265,
-            "exited": false
+            "exited": true
         },
         {
             "deviceId": "801KPMZ1409427",
             "name": "com.DefaultCompany.homear",
             "processId": 1401,
+            "exited": true
+        },
+        {
+            "deviceId": "801KPMZ1409427",
+            "name": "com.DefaultCompany.homear",
+            "processId": 9305,
+            "exited": true
+        },
+        {
+            "deviceId": "801KPMZ1409427",
+            "name": "com.DefaultCompany.homear",
+            "processId": 10164,
+            "exited": false
+        },
+        {
+            "deviceId": "801KPMZ1409427",
+            "name": "com.DefaultCompany.homear",
+            "processId": 11671,
+            "exited": false
+        },
+        {
+            "deviceId": "801KPMZ1409427",
+            "name": "com.DefaultCompany.homear",
+            "processId": 12978,
+            "exited": false
+        },
+        {
+            "deviceId": "801KPMZ1409427",
+            "name": "com.DefaultCompany.homear",
+            "processId": 17325,
+            "exited": false
+        },
+        {
+            "deviceId": "801KPMZ1409427",
+            "name": "com.DefaultCompany.homear",
+            "processId": 19360,
+            "exited": false
+        },
+        {
+            "deviceId": "801KPMZ1409427",
+            "name": "com.DefaultCompany.homear",
+            "processId": 21553,
+            "exited": false
+        },
+        {
+            "deviceId": "801KPMZ1409427",
+            "name": "com.DefaultCompany.homear",
+            "processId": 22571,
+            "exited": false
+        },
+        {
+            "deviceId": "801KPMZ1409427",
+            "name": "com.DefaultCompany.homear",
+            "processId": 24236,
+            "exited": false
+        },
+        {
+            "deviceId": "801KPMZ1409427",
+            "name": "com.DefaultCompany.homear",
+            "processId": 25222,
+            "exited": false
+        },
+        {
+            "deviceId": "801KPMZ1409427",
+            "name": "com.DefaultCompany.homear",
+            "processId": 26620,
             "exited": false
         },
         {
