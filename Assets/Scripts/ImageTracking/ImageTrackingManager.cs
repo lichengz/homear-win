@@ -17,13 +17,13 @@ public class ImageTrackingManager : MonoBehaviour
     void Awake()
     {
         aRTrackedImageManager = GetComponent<ARTrackedImageManager>();
-        foreach (GameObject prefab in placeablePrefabs)
-        {
-            GameObject newPrefab = Instantiate(prefab, Vector3.zero, Quaternion.identity);
-            newPrefab.name = prefab.name;
-            spawnedPrefabs.Add(prefab.name, newPrefab);
-            prefab.SetActive(false);
-        }
+        // foreach (GameObject prefab in placeablePrefabs)
+        // {
+        //     GameObject newPrefab = Instantiate(prefab, Vector3.zero, Quaternion.identity);
+        //     newPrefab.name = prefab.name;
+        //     spawnedPrefabs.Add(prefab.name, newPrefab);
+        //     prefab.SetActive(false);
+        // }
     }
 
     /// <summary>

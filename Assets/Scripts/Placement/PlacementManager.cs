@@ -67,6 +67,7 @@ public class PlacementManager : MonoBehaviour
         aRRaycastManager = GetComponent<ARRaycastManager>();
         CubeButton.onClick.AddListener(() => ChangePrefabTo("Cube"));
         BallButton.onClick.AddListener(() => ChangePrefabTo("Ball"));
+        InitPrefabs();
     }
 
     // Update is called once per frame
@@ -134,17 +135,6 @@ public class PlacementManager : MonoBehaviour
                         ClearSelection();
                         // uIManager.UpdateUIAccordingToSelectedObject();
                     }
-
-                    // Place objects on AR plane
-                    if (aRRaycastManager.Raycast(touchPosition, hits, TrackableType.Planes))
-                    {
-                        var hitPose = hits[0].pose;
-                        lastSelectedObject = Instantiate(placePrefab, placementPose.position, placementPose.rotation).GetComponent<PlacementObject>();
-                        // placedObjects = FindObjectsOfType<PlacementObject>();
-                        //ChangeSelectedObject(lastSelectedObject);
-                        // lastSelectedObject.oriScale = lastSelectedObject.transform.localScale;
-                        Debug.Log("Place instantiated");
-                    }
                     break;
                 case TouchPhase.Stationary:
                     // Open ManipCanvas
@@ -184,6 +174,27 @@ public class PlacementManager : MonoBehaviour
 
         }
 
+    }
+
+    public void PlaceObject()
+    {
+        // Place objects on AR plane
+        if (hits.Count > 0 || Input.GetKey(KeyCode.Space))
+        {
+            lastSelectedObject = Instantiate(placePrefab, placementPose.position, placementPose.rotation).GetComponent<PlacementObject>();
+            // placedObjects = FindObjectsOfType<PlacementObject>();
+            //ChangeSelectedObject(lastSelectedObject);
+            // lastSelectedObject.oriScale = lastSelectedObject.transform.localScale;
+            Debug.Log("Place instantiated");
+        }
+    }
+
+    void InitPrefabs()
+    {
+        foreach (Object o in inventory.objectList)
+        {
+            if (o.prefab != null) Destroy(Instantiate(o.prefab, Vector3.zero, Quaternion.identity));
+        }
     }
 
     bool IsOnGUi(Vector2 pos)

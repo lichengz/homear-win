@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 525bf1a6d53b0224d93dcf366de70fdb, type: 3}
   m_Name: pencil case
   m_EditorClassIdentifier: 
-  prefab: {fileID: 2800768993332814789, guid: 840e5ee650e8dae4e9fc3c3d38015183, type: 3}
+  prefab: {fileID: 4879148191907164425, guid: 9c978e44d48461745b5468282fbd8fb3, type: 3}
   icon: {fileID: 21300000, guid: 1edb63370c532ce48a98611553df9522, type: 3}
   text: pencil case
