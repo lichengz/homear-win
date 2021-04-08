@@ -2011,3 +2011,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadingScreen: {fileID: 1284776468}
   slider: {fileID: 1284776469}
+  progressAnimationMultiplier: 0.25

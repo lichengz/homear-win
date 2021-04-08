@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Inventory
   m_EditorClassIdentifier: 
   objectList:
-  - {fileID: 11400000, guid: 9c076bce3ea083346896b58b9aa2459b, type: 2}
-  - {fileID: 11400000, guid: 8dba864d9e178944883535bb828759d9, type: 2}
+  - {fileID: 11400000, guid: ec30378fc4ebe094e971949ee82ed69c, type: 2}
+  - {fileID: 11400000, guid: 9e241a96b6d76df4abfb2d2838b494ef, type: 2}
   - {fileID: 11400000, guid: ebdabab3e9e46c248a2e60ecf6a1e60d, type: 2}
   - {fileID: 11400000, guid: ebdabab3e9e46c248a2e60ecf6a1e60d, type: 2}
   - {fileID: 11400000, guid: ebdabab3e9e46c248a2e60ecf6a1e60d, type: 2}

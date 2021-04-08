@@ -439,6 +439,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cube1
       objectReference: {fileID: 0}
+    - target: {fileID: 2321044263383519580, guid: 354191d962e0d194c9a61eae3ec6436b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3281372996916016061, guid: 354191d962e0d194c9a61eae3ec6436b,
         type: 3}
       propertyPath: m_Enabled
@@ -1342,6 +1347,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Cube 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2321044263383519580, guid: 354191d962e0d194c9a61eae3ec6436b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3281372996916016061, guid: 354191d962e0d194c9a61eae3ec6436b,
         type: 3}
