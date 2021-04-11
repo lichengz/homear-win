@@ -18,6 +18,12 @@ public class UISystem : MonoBehaviour
     float animationDur = 0.25f;
     float screenWidth;
     float screenHeight;
+
+    // Annotation
+    bool isAnnotationMenuOpen;
+    [SerializeField] RectTransform annotationMenu;
+    [SerializeField] GameObject ARNote;
+
     /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>
@@ -54,6 +60,17 @@ public class UISystem : MonoBehaviour
             swipeUpDetected = false;
             ShowObjectPanel();
         }
+
+        UpdateARNoteRotation();
+    }
+
+    public bool isUIactive()
+    {
+        if (ARNote.activeInHierarchy)
+        {
+            return true;
+        }
+        return false;
     }
 
     // ----------------- Object Panel -----------------------------
@@ -124,4 +141,54 @@ public class UISystem : MonoBehaviour
         return go;
     }
     // ----------------- Object Panel -----------------------------
+
+    // ----------------- Annotation Panel -----------------------------
+    public void switchAnnotationMenu()
+    {
+        if (isAnnotationMenuOpen)
+        {
+            annotationMenu.DOAnchorPos(new Vector2(0, -500), animationDur);
+            isAnnotationMenuOpen = false;
+        }
+        else
+        {
+            annotationMenu.DOAnchorPos(Vector2.zero, animationDur);
+            isAnnotationMenuOpen = true;
+        }
+
+    }
+
+    public void SwitchARNote()
+    {
+        if (!ARNote.activeInHierarchy)
+        {
+            ARNote.SetActive(true);
+            ARNote.transform.DOScale(new Vector3(1, 1, 1), animationDur);
+        }
+        else
+        {
+            StartCoroutine(DismissARNote());
+        }
+
+    }
+
+    private IEnumerator DismissARNote()
+    {
+        ARNote.transform.DOScale(new Vector3(0.1f, 0.1f, 0.1f), animationDur);
+        yield return new WaitForSeconds(animationDur);
+        ARNote.SetActive(false);
+    }
+
+    public void UpdateARNoteRotation()
+    {
+        // var cameraForward = Camera.main.transform.forward;
+        // var cameraBearing = new Vector3(cameraForward.x, 0, cameraForward.z).normalized;
+        // ARNote.transform.rotation = Quaternion.LookRotation(cameraBearing);
+        if (PlacementManager.Instance.lastSelectedObject != null)
+        {
+            ARNote.transform.position = PlacementManager.Instance.lastSelectedObject.transform.position + new Vector3(0, 0.5f, 0);
+            ARNote.transform.LookAt(Camera.main.transform);
+        }
+    }
+    // ----------------- Annotation Panel -----------------------------
 }

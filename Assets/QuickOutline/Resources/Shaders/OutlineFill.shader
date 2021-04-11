@@ -8,7 +8,7 @@
 
 Shader "Custom/Outline Fill" {
   Properties {
-    [Enum(UnityEngine.Rendering.CompareFunction)] _ZTest("ZTest", Float) = 0
+    // [Enum(UnityEngine.Rendering.CompareFunction)] _ZTest("ZTest", Float) = 0
 
     _OutlineColor("Outline Color", Color) = (1, 1, 1, 1)
     _OutlineWidth("Outline Width", Range(0, 10)) = 2
@@ -24,7 +24,7 @@ Shader "Custom/Outline Fill" {
     Pass {
       Name "Fill"
       Cull Off
-      ZTest [_ZTest]
+      // ZTest [_ZTest]
       ZWrite Off
       Blend SrcAlpha OneMinusSrcAlpha
       ColorMask RGB

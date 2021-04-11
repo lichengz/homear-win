@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 525bf1a6d53b0224d93dcf366de70fdb, type: 3}
   m_Name: lamp
   m_EditorClassIdentifier: 
-  prefab: {fileID: 3209375149290731095, guid: f3d5e3b642cf8fc45bde795597b76263, type: 3}
+  prefab: {fileID: 5235961356319910243, guid: 3142312fe72c4fa4990dba51628ae0c5, type: 3}
   icon: {fileID: 21300000, guid: 06699862b60ef014bbddc4c939d982bd, type: 3}
   text: lamp

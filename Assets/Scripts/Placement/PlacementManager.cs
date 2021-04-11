@@ -73,6 +73,7 @@ public class PlacementManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (UISystem.Instance.isUIactive()) return;
         if (UIManager.Instance.isUIactive()) return;
         // Select in editor
 #if UNITY_EDITOR
@@ -85,6 +86,12 @@ public class PlacementManager : MonoBehaviour
             {
                 ChangeSelectedObject(placementObject);
             }
+        }
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            Debug.Log("!!!!!");
+            ChangePrefabTo("lamp");
+            Instantiate(placePrefab, placementPose.position, placementPose.rotation).GetComponent<PlacementObject>();
         }
 #endif
 
@@ -181,10 +188,10 @@ public class PlacementManager : MonoBehaviour
         // Place objects on AR plane
         if (hits.Count > 0 || Input.GetKey(KeyCode.Space))
         {
-            lastSelectedObject = Instantiate(placePrefab, placementPose.position, placementPose.rotation).GetComponent<PlacementObject>();
             // placedObjects = FindObjectsOfType<PlacementObject>();
             //ChangeSelectedObject(lastSelectedObject);
             // lastSelectedObject.oriScale = lastSelectedObject.transform.localScale;
+            ChangeSelectedObject(Instantiate(placePrefab, placementPose.position, placementPose.rotation).GetComponent<PlacementObject>());
             Debug.Log("Place instantiated");
         }
     }
