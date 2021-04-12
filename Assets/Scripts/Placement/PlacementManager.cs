@@ -22,6 +22,8 @@ public class PlacementManager : MonoBehaviour
     [SerializeField]
     PlacementObjectEvent placementObjectEvent;
     [SerializeField]
+    BoolEvent onObjectSelected;
+    [SerializeField]
     Color activeColor = Color.red;
     [SerializeField]
     Color inactiveColor = Color.gray;
@@ -42,6 +44,8 @@ public class PlacementManager : MonoBehaviour
             placePrefab = value;
         }
     }
+    [SerializeField]
+    BoolEvent onObjectPrefabSelectedEvent;
 
     [SerializeField]
     Button CubeButton;
@@ -193,12 +197,13 @@ public class PlacementManager : MonoBehaviour
             // lastSelectedObject.oriScale = lastSelectedObject.transform.localScale;
             ChangeSelectedObject(Instantiate(placePrefab, placementPose.position, placementPose.rotation).GetComponent<PlacementObject>());
             Debug.Log("Place instantiated");
+            onObjectPrefabSelectedEvent.Raise(false);
         }
     }
 
     void InitPrefabs()
     {
-        foreach (Object o in inventory.objectList)
+        foreach (PlacedObject o in inventory.objectList)
         {
             if (o.prefab != null) Destroy(Instantiate(o.prefab, Vector3.zero, Quaternion.identity));
         }
@@ -248,6 +253,7 @@ public class PlacementManager : MonoBehaviour
                 // meshRenderer.material.color = activeColor;
                 cur.GetComponent<Outline>().enabled = true;
                 placementObjectEvent.Raise(cur);
+                onObjectSelected.Raise(true);
             }
         }
         // uIManager.UpdateUIAccordingToSelectedObject();
@@ -259,6 +265,7 @@ public class PlacementManager : MonoBehaviour
         {
             lastSelectedObject.IsSelected = false;
             lastSelectedObject.GetComponent<Outline>().enabled = false;
+            onObjectSelected.Raise(false);
         }
         lastSelectedObject = null;
     }
@@ -267,6 +274,7 @@ public class PlacementManager : MonoBehaviour
     {
         placePrefab = Resources.Load<GameObject>($"Prefabs/{prefabName}");
         if (placePrefab == null) Debug.Log("Invalid prefabName");
+        onObjectPrefabSelectedEvent.Raise(true);
     }
 
     public void ScaleSelectedObject(int scaling)

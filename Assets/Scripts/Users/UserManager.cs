@@ -15,7 +15,7 @@ public class UserManager : MonoBehaviour
     [SerializeField] Text welcomMsg;
     public static int numOfScheduleSlots = 6;
 
-    public static User curUser;
+    public static User curUser = new User(0, "Licheng");
     /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>

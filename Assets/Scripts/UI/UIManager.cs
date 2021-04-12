@@ -114,7 +114,7 @@ public class UIManager : MonoBehaviour
     {
         AnnotationUI.transform.GetChild(0).GetChild(0).gameObject.SetActive(anno.isReminderActive);
         AnnotationUI.transform.GetChild(0).GetChild(1).gameObject.SetActive(anno.isScheduleActive);
-        reminderText.text = anno.reminderText;
+        //reminderText.text = anno.reminder.dict[UserManager.curUser].reminders[0];
     }
 
     public void UpdateUIAccordingToSelectedObject(PlacementObject selectedObject)

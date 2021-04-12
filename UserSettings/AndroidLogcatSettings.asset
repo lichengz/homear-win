@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "801KPMZ1409427",
         "name": "com.DefaultCompany.homear",
-        "processId": 15897,
+        "processId": 32647,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -180,6 +180,60 @@
             "deviceId": "801KPMZ1409427",
             "name": "com.DefaultCompany.homear",
             "processId": 15897,
+            "exited": false
+        },
+        {
+            "deviceId": "801KPMZ1409427",
+            "name": "com.DefaultCompany.homear",
+            "processId": 26803,
+            "exited": false
+        },
+        {
+            "deviceId": "801KPMZ1409427",
+            "name": "com.DefaultCompany.homear",
+            "processId": 27414,
+            "exited": false
+        },
+        {
+            "deviceId": "801KPMZ1409427",
+            "name": "com.DefaultCompany.homear",
+            "processId": 28046,
+            "exited": false
+        },
+        {
+            "deviceId": "801KPMZ1409427",
+            "name": "com.DefaultCompany.homear",
+            "processId": 30113,
+            "exited": false
+        },
+        {
+            "deviceId": "801KPMZ1409427",
+            "name": "com.DefaultCompany.homear",
+            "processId": 30525,
+            "exited": false
+        },
+        {
+            "deviceId": "801KPMZ1409427",
+            "name": "com.DefaultCompany.homear",
+            "processId": 31194,
+            "exited": false
+        },
+        {
+            "deviceId": "801KPMZ1409427",
+            "name": "com.DefaultCompany.homear",
+            "processId": 31577,
+            "exited": false
+        },
+        {
+            "deviceId": "801KPMZ1409427",
+            "name": "com.DefaultCompany.homear",
+            "processId": 31977,
+            "exited": false
+        },
+        {
+            "deviceId": "801KPMZ1409427",
+            "name": "com.DefaultCompany.homear",
+            "processId": 32647,
             "exited": false
         },
         {

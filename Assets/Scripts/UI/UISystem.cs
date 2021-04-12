@@ -123,13 +123,13 @@ public class UISystem : MonoBehaviour
         {
             GameObject.Destroy(child.gameObject);
         }
-        foreach (Object placementObject in PlacementManager.Instance.inventory.objectList)
+        foreach (PlacedObject placementObject in PlacementManager.Instance.inventory.objectList)
         {
             generateObjectSlotPrefab(placementObject).transform.SetParent(objectSlotContainer);
         }
     }
 
-    GameObject generateObjectSlotPrefab(Object placementObject)
+    GameObject generateObjectSlotPrefab(PlacedObject placementObject)
     {
         GameObject go = Instantiate(objectSlotPrefab, Vector3.zero, Quaternion.identity);
         if (placementObject.prefab != null)
@@ -149,6 +149,7 @@ public class UISystem : MonoBehaviour
         {
             annotationMenu.DOAnchorPos(new Vector2(0, -500), animationDur);
             isAnnotationMenuOpen = false;
+            if (ARNote.activeInHierarchy) StartCoroutine(DismissARNote());
         }
         else
         {

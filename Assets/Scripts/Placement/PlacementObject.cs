@@ -64,7 +64,7 @@ public class PlacementObject : MonoBehaviour, ISaveable
     {
         public Boolean isReminderActive;
         public Boolean isScheduleActive;
-        public string reminderText;
+        public Note reminder;
         public Schedule schedule;
     }
 
@@ -80,7 +80,10 @@ public class PlacementObject : MonoBehaviour, ISaveable
             OverLayTextMesh.text = "Just a " + gameObject.name;
             OverLayTextMesh.gameObject.SetActive(false);
         }
-
+        // foreach (User key in annotation.reminder.test.Keys)
+        // {
+        //     Debug.Log(key.name);
+        // }
     }
 
     // ISaveable
@@ -107,7 +110,7 @@ public class PlacementObject : MonoBehaviour, ISaveable
     public void CaptureSpeech(string speech)
     {
         if (!IsSelected) return;
-        annotation.reminderText = speech;
+        annotation.reminder.InsertNote(UserManager.curUser, speech);
         annotation.isReminderActive = true;
         UIManager.Instance.UpdateAnnotationUI(annotation);
     }
