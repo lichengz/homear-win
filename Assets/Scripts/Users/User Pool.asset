@@ -12,4 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0d04122c5203f34193da7e460450a77, type: 3}
   m_Name: User Pool
   m_EditorClassIdentifier: 
-  userList: []
+  userList:
+  - index: 0
+    name: a
+  - index: 1
+    name: b
+  - index: 2
+    name: c

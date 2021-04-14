@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using TMPro;
 
 public class UISystem : MonoBehaviour
 {
     public static UISystem Instance { get; private set; }
+    [SerializeField] UserPool userPool;
     // Swipe & Object Panel
     Vector2 startTouchPos, endTouchPos;
     bool swipeUpDetected;
@@ -15,6 +17,8 @@ public class UISystem : MonoBehaviour
     RectTransform mainPanel, objectPanel;
     [SerializeField] Transform objectSlotContainer;
     [SerializeField] GameObject objectSlotPrefab;
+    [SerializeField] Transform ARNoteBody;
+    int ARNoteIndex = 0;
     float animationDur = 0.25f;
     float screenWidth;
     float screenHeight;
@@ -23,6 +27,10 @@ public class UISystem : MonoBehaviour
     bool isAnnotationMenuOpen;
     [SerializeField] RectTransform annotationMenu;
     [SerializeField] GameObject ARNote;
+    [SerializeField] TextMeshPro userTMPro;
+    [SerializeField] TextMeshPro noteTMPro;
+    [SerializeField] GameObject noteSlotPrefab;
+    IEnumerator enumerator;
 
     /// <summary>
     /// Awake is called when the script instance is being loaded.
@@ -42,6 +50,7 @@ public class UISystem : MonoBehaviour
         screenHeight = Screen.height;
         mainPanel.anchoredPosition = new Vector2(-screenWidth, 0);
         objectPanel.anchoredPosition = new Vector2(0, -screenHeight);
+        InitARNote();
     }
     // Start is called before the first frame update
     void Start()
@@ -62,6 +71,26 @@ public class UISystem : MonoBehaviour
         }
 
         UpdateARNoteRotation();
+        SwitchUser();
+    }
+
+    public void SwitchUser()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            UserManager.curUser = userPool.userList[0];
+            Debug.Log("Logged in as user1");
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            UserManager.curUser = userPool.userList[1];
+            Debug.Log("Logged in as user2");
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            UserManager.curUser = userPool.userList[2];
+            Debug.Log("Logged in as user3");
+        }
     }
 
     public bool isUIactive()
@@ -165,6 +194,7 @@ public class UISystem : MonoBehaviour
         {
             ARNote.SetActive(true);
             ARNote.transform.DOScale(new Vector3(1, 1, 1), animationDur);
+            UpdateARNote();
         }
         else
         {
@@ -189,7 +219,51 @@ public class UISystem : MonoBehaviour
         {
             ARNote.transform.position = PlacementManager.Instance.lastSelectedObject.transform.position + new Vector3(0, 0.5f, 0);
             ARNote.transform.LookAt(Camera.main.transform);
+            ARNote.transform.localRotation *= Quaternion.Euler(0, 180, 0);
+            enumerator = PlacementManager.Instance.lastSelectedObject.annotation.reminder.dict.Keys.GetEnumerator();
         }
+    }
+
+    private void InitARNote()
+    {
+        ARNote.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        ARNote.SetActive(false);
+    }
+
+    public void UpdateARNoteIndex(bool increase)
+    {
+        int cap = PlacementManager.Instance.lastSelectedObject.annotation.reminder.dict.Count;
+        if (increase)
+        {
+            if (ARNoteIndex < cap - 1) ARNoteIndex++;
+            UpdateARNote();
+        }
+        else
+        {
+            if (ARNoteIndex > 0) ARNoteIndex--;
+            UpdateARNote();
+        }
+    }
+
+    public void UpdateARNote()
+    {
+        for (int i = 0; i <= ARNoteIndex; i++)
+        {
+            enumerator.MoveNext();
+        }
+        User cur = (User)enumerator.Current;
+        userTMPro.text = cur.name;
+        foreach (Transform child in ARNoteBody)
+        {
+            Destroy(child.gameObject);
+        }
+        foreach (string str in PlacementManager.Instance.lastSelectedObject.annotation.reminder.dict[cur])
+        {
+            GameObject noteSlot = Instantiate(noteSlotPrefab, Vector3.zero, Quaternion.identity);
+            noteSlot.transform.SetParent(ARNoteBody);
+            noteSlot.GetComponent<Text>().text = str;
+        }
+
     }
     // ----------------- Annotation Panel -----------------------------
 }

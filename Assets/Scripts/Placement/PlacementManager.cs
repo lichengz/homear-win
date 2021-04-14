@@ -78,7 +78,7 @@ public class PlacementManager : MonoBehaviour
     void Update()
     {
         if (UISystem.Instance.isUIactive()) return;
-        if (UIManager.Instance.isUIactive()) return;
+        // if (UIManager.Instance.isUIactive()) return;
         // Select in editor
 #if UNITY_EDITOR
         Ray r = arCamera.ScreenPointToRay(Input.mousePosition);

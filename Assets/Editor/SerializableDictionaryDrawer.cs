@@ -92,7 +92,7 @@ public class SerializableDictionaryDrawer : PropertyDrawer
 
         rect0.x += halfWidth + 4f;
 
-        EditorGUI.PropertyField(rect0, valueProp.FindPropertyRelative("notes"));
+        EditorGUI.PropertyField(rect0, valueProp);
 
         EditorGUIUtility.labelWidth = prevLabelWidth;
 

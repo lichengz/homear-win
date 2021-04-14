@@ -42,15 +42,28 @@ public class SpeechManager : MonoBehaviour
 
         Checkpermission();
     }
-#if UNITY_EDITOR
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.F1))
         {
-            onFinalSpeechResult.Raise("Broadcasting...");
+            onFinalSpeechResult.Raise("Broadcasting NO.1...");
+            Debug.Log("Sent speech msg.");
         }
-    }
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+            onFinalSpeechResult.Raise("Broadcasting NO.2...");
+            Debug.Log("Sent speech msg.");
+        }
+        if (Input.GetKeyDown(KeyCode.F3))
+        {
+            onFinalSpeechResult.Raise("Broadcasting NO.3..");
+            Debug.Log("Sent speech msg.");
+        }
 #endif
+    }
+
     void Checkpermission()
     {
 #if UNITY_ANDROID
