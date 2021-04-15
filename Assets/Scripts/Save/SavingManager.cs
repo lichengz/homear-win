@@ -21,6 +21,10 @@ public class SavingManager : MonoBehaviour
         }
         LoadGame();
     }
+    void OnApplicationPause()
+    {
+        SaveGame();
+    }
 
     void OnApplicationQuit()
     {

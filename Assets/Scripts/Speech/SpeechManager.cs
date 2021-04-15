@@ -17,7 +17,7 @@ public class SpeechManager : MonoBehaviour
     // [SerializeField]
     // PlacementManager placementManager;
     [SerializeField]
-    StringEvent onFinalSpeechResult;
+    public StringEvent onFinalSpeechResult;
     void Awake()
     {
         if (Instance == null)

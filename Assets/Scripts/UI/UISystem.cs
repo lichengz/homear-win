@@ -27,10 +27,12 @@ public class UISystem : MonoBehaviour
     bool isAnnotationMenuOpen;
     [SerializeField] RectTransform annotationMenu;
     [SerializeField] GameObject ARNote;
+    [SerializeField] GameObject ARNoteModel;
+    [SerializeField] Material leftArrow;
+    [SerializeField] Material rightArrow;
     [SerializeField] TextMeshPro userTMPro;
     [SerializeField] TextMeshPro noteTMPro;
     [SerializeField] GameObject noteSlotPrefab;
-    IEnumerator enumerator;
 
     /// <summary>
     /// Awake is called when the script instance is being loaded.
@@ -50,13 +52,13 @@ public class UISystem : MonoBehaviour
         screenHeight = Screen.height;
         mainPanel.anchoredPosition = new Vector2(-screenWidth, 0);
         objectPanel.anchoredPosition = new Vector2(0, -screenHeight);
-        InitARNote();
     }
     // Start is called before the first frame update
     void Start()
     {
         InitObjectPanel();
         mainPanel.DOAnchorPos(Vector2.zero, animationDur);
+        InitARNote();
     }
 
     // Update is called once per frame
@@ -101,6 +103,21 @@ public class UISystem : MonoBehaviour
         }
         return false;
     }
+
+    // ----------------- Hack -----------------------------
+    public void ARNoteHack()
+    {
+        UserManager.curUser = userPool.userList[0];
+        SpeechManager.Instance.onFinalSpeechResult.Raise("Broadcasting NO.1...");
+        UserManager.curUser = userPool.userList[1];
+        SpeechManager.Instance.onFinalSpeechResult.Raise("Broadcasting NO.1...");
+        SpeechManager.Instance.onFinalSpeechResult.Raise("Broadcasting NO.2...");
+        UserManager.curUser = userPool.userList[2];
+        SpeechManager.Instance.onFinalSpeechResult.Raise("Broadcasting NO.1...");
+        SpeechManager.Instance.onFinalSpeechResult.Raise("Broadcasting NO.2...");
+        SpeechManager.Instance.onFinalSpeechResult.Raise("Broadcasting NO.3...");
+    }
+    // ----------------- Hack -----------------------------
 
     // ----------------- Object Panel -----------------------------
     void SwipeCheck()
@@ -192,9 +209,7 @@ public class UISystem : MonoBehaviour
     {
         if (!ARNote.activeInHierarchy)
         {
-            ARNote.SetActive(true);
-            ARNote.transform.DOScale(new Vector3(1, 1, 1), animationDur);
-            UpdateARNote();
+            StartCoroutine(ShowARNote());
         }
         else
         {
@@ -202,12 +217,25 @@ public class UISystem : MonoBehaviour
         }
 
     }
+    private IEnumerator ShowARNote()
+    {
+        ARNote.SetActive(true);
+        ARNoteBody.gameObject.SetActive(true);
+        ARNote.transform.DOScale(new Vector3(1, 1, 1), animationDur);
+        yield return new WaitForSeconds(animationDur);
+        UpdateARNote();
+    }
 
     private IEnumerator DismissARNote()
     {
+        ARNoteBody.gameObject.SetActive(false);
         ARNote.transform.DOScale(new Vector3(0.1f, 0.1f, 0.1f), animationDur);
         yield return new WaitForSeconds(animationDur);
         ARNote.SetActive(false);
+        foreach (Transform child in ARNoteBody)
+        {
+            Destroy(child.gameObject);
+        }
     }
 
     public void UpdateARNoteRotation()
@@ -220,7 +248,6 @@ public class UISystem : MonoBehaviour
             ARNote.transform.position = PlacementManager.Instance.lastSelectedObject.transform.position + new Vector3(0, 0.5f, 0);
             ARNote.transform.LookAt(Camera.main.transform);
             ARNote.transform.localRotation *= Quaternion.Euler(0, 180, 0);
-            enumerator = PlacementManager.Instance.lastSelectedObject.annotation.reminder.dict.Keys.GetEnumerator();
         }
     }
 
@@ -247,6 +274,9 @@ public class UISystem : MonoBehaviour
 
     public void UpdateARNote()
     {
+        int cap = PlacementManager.Instance.lastSelectedObject.annotation.reminder.dict.Count;
+        if (cap == 0) return;
+        IEnumerator enumerator = PlacementManager.Instance.lastSelectedObject.annotation.reminder.dict.Keys.GetEnumerator();
         for (int i = 0; i <= ARNoteIndex; i++)
         {
             enumerator.MoveNext();
@@ -261,9 +291,13 @@ public class UISystem : MonoBehaviour
         {
             GameObject noteSlot = Instantiate(noteSlotPrefab, Vector3.zero, Quaternion.identity);
             noteSlot.transform.SetParent(ARNoteBody);
-            noteSlot.GetComponent<Text>().text = str;
+            noteSlot.transform.localPosition = new Vector3(noteSlot.transform.position.x, noteSlot.transform.position.y, -0.1f);
+             noteSlot.transform.localRotation = ARNoteBody.transform.localRotation;
+            // noteSlot.GetComponent<Text>().text = str;
+            noteSlot.GetComponent<TextMeshPro>().text = str;
         }
-
+        leftArrow.SetColor("_TintColor", ARNoteIndex == 0 ? Color.grey : Color.black);
+        rightArrow.SetColor("_TintColor", ARNoteIndex == cap - 1 ? Color.grey : Color.black);
     }
     // ----------------- Annotation Panel -----------------------------
 }
