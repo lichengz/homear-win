@@ -14,7 +14,7 @@ public class Schedule
 
     public void InsertSlot(int index)
     {
-        if (slots[index].index == -1) return;
+        if (slots[index].index != -1) return;
         if (UserManager.curUser == null)
         {
             UserManager.curUser = new User(0, "Licheng");

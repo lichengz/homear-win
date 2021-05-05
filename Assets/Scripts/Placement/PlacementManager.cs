@@ -17,7 +17,7 @@ public class PlacementManager : MonoBehaviour
     [SerializeField]
     GameObject placePrefab;
     [SerializeField]
-    PlacementObject[] placedObjects;
+    public PlacementObject[] placedObjects;
     public PlacementObject lastSelectedObject;
     [SerializeField]
     PlacementObjectEvent placementObjectEvent;

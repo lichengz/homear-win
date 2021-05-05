@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class WorldPositionButton : MonoBehaviour
 {
     [SerializeField]
-    Transform targetTransform;
+    public Transform targetTransform;
     RectTransform rectTransform;
     Image image;
     void Awake()

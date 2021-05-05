@@ -34,6 +34,17 @@ public class UISystem : MonoBehaviour
     [SerializeField] TextMeshPro noteTMPro;
     [SerializeField] GameObject noteSlotPrefab;
 
+    // ARCalendar
+    [SerializeField] GameObject ARCalendar;
+    [SerializeField] GameObject ARCalendarLid;
+    [SerializeField] Transform ARCalendarSlotContainer;
+    [SerializeField] GameObject ARCalendarSlotPrefab;
+    [SerializeField] Transform ARCalendarSlotButtonContainer;
+    [SerializeField] GameObject ARCalendarSlotButtonPrefab;
+
+    // Bubble Alert
+    [SerializeField] RectTransform leftBubble;
+
     /// <summary>
     /// Awake is called when the script instance is being loaded.
     /// </summary>
@@ -58,7 +69,7 @@ public class UISystem : MonoBehaviour
     {
         InitObjectPanel();
         mainPanel.DOAnchorPos(Vector2.zero, animationDur);
-        InitARNote();
+        InitARNoteAndARCalendar();
     }
 
     // Update is called once per frame
@@ -73,6 +84,7 @@ public class UISystem : MonoBehaviour
         }
 
         UpdateARNoteRotation();
+        UpdateARCalendarRotation();
         SwitchUser();
     }
 
@@ -188,7 +200,7 @@ public class UISystem : MonoBehaviour
     }
     // ----------------- Object Panel -----------------------------
 
-    // ----------------- Annotation Panel -----------------------------
+    // ----------------- ARNote -----------------------------
     public void switchAnnotationMenu()
     {
         if (isAnnotationMenuOpen)
@@ -196,6 +208,7 @@ public class UISystem : MonoBehaviour
             annotationMenu.DOAnchorPos(new Vector2(0, -500), animationDur);
             isAnnotationMenuOpen = false;
             if (ARNote.activeInHierarchy) StartCoroutine(DismissARNote());
+            if (ARCalendar.activeInHierarchy) StartCoroutine(DismissARCalendar());
         }
         else
         {
@@ -251,10 +264,12 @@ public class UISystem : MonoBehaviour
         }
     }
 
-    private void InitARNote()
+    private void InitARNoteAndARCalendar()
     {
         ARNote.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
         ARNote.SetActive(false);
+        ARCalendar.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        ARCalendar.SetActive(false);
     }
 
     public void UpdateARNoteIndex(bool increase)
@@ -292,12 +307,104 @@ public class UISystem : MonoBehaviour
             GameObject noteSlot = Instantiate(noteSlotPrefab, Vector3.zero, Quaternion.identity);
             noteSlot.transform.SetParent(ARNoteBody);
             noteSlot.transform.localPosition = new Vector3(noteSlot.transform.position.x, noteSlot.transform.position.y, -0.1f);
-             noteSlot.transform.localRotation = ARNoteBody.transform.localRotation;
+            noteSlot.transform.localRotation = ARNoteBody.transform.localRotation;
             // noteSlot.GetComponent<Text>().text = str;
             noteSlot.GetComponent<TextMeshPro>().text = str;
         }
         leftArrow.SetColor("_TintColor", ARNoteIndex == 0 ? Color.grey : Color.black);
         rightArrow.SetColor("_TintColor", ARNoteIndex == cap - 1 ? Color.grey : Color.black);
     }
-    // ----------------- Annotation Panel -----------------------------
+    // ----------------- ARNote -----------------------------
+
+    // ----------------- ARCalendar -----------------------------
+    public void SwitchARCalendar()
+    {
+        if (!ARCalendar.activeInHierarchy)
+        {
+            StartCoroutine(ShowARCalendar());
+        }
+        else
+        {
+            StartCoroutine(DismissARCalendar());
+        }
+
+    }
+    private IEnumerator ShowARCalendar()
+    {
+        ARCalendar.SetActive(true);
+        ARCalendar.transform.DOScale(new Vector3(1, 1, 1), animationDur);
+        ARCalendarLid.transform.DORotateQuaternion(ARCalendar.transform.rotation, animationDur * 2);
+        yield return new WaitForSeconds(animationDur * 2);
+        UpdateARCalendare();
+    }
+
+    private IEnumerator DismissARCalendar()
+    {
+        ARCalendar.transform.DOScale(new Vector3(0.1f, 0.1f, 0.1f), animationDur);
+        ARCalendarLid.transform.DORotateQuaternion(ARCalendar.transform.rotation * Quaternion.Euler(-179, 0, 0), animationDur * 2);
+        yield return new WaitForSeconds(animationDur * 2);
+        ARCalendar.SetActive(false);
+        foreach (Transform child in ARCalendarSlotContainer) Destroy(child.gameObject);
+        foreach (Transform child in ARCalendarSlotButtonContainer) Destroy(child.gameObject);
+    }
+
+    public void UpdateARCalendarRotation()
+    {
+        if (PlacementManager.Instance.lastSelectedObject != null)
+        {
+            ARCalendar.transform.position = PlacementManager.Instance.lastSelectedObject.transform.position + new Vector3(0, 0.5f, 0);
+            ARCalendar.transform.LookAt(Camera.main.transform);
+            ARCalendar.transform.localRotation *= Quaternion.Euler(0, 180, 0);
+        }
+    }
+
+    public void UpdateARCalendare()
+    {
+        Schedule scheduleOfSelectedObject = PlacementManager.Instance.lastSelectedObject.annotation.schedule;
+        int n = UserManager.numOfScheduleSlots / 2;
+        for (int i = 0; i < UserManager.numOfScheduleSlots; i++)
+        {
+            GameObject slot = Instantiate(ARCalendarSlotPrefab, Vector3.zero, Quaternion.identity);
+            slot.transform.SetParent(ARCalendarSlotContainer);
+            slot.transform.position = ARCalendarSlotContainer.position;
+            if (i < n)
+            {
+                slot.transform.position += (n - i) * new Vector3(0, 0.1f, 0);
+            }
+            else
+            {
+                slot.transform.position -= (i - n + 1) * new Vector3(0, 0.1f, 0);
+            }
+            if (scheduleOfSelectedObject.slots[i].index == -1)
+            {
+                slot.GetComponentInChildren<TextMeshPro>().text = "Empty";
+            }
+            else
+            {
+                slot.GetComponentInChildren<TextMeshPro>().text = scheduleOfSelectedObject.slots[i].name;
+            }
+            slot.transform.localRotation = ARCalendarSlotContainer.transform.localRotation;
+            GameObject slotButton = Instantiate(ARCalendarSlotButtonPrefab, Vector3.zero, Quaternion.identity);
+            slotButton.GetComponent<WorldPositionButton>().targetTransform = slot.transform;
+            slotButton.transform.SetParent(ARCalendarSlotButtonContainer);
+            int tmp = i;
+            slotButton.GetComponent<Button>().onClick.AddListener(() => InsertCalendarSlot(tmp));
+        }
+    }
+
+    public void InsertCalendarSlot(int index)
+    {
+        if (PlacementManager.Instance.lastSelectedObject.annotation.schedule.slots[index].index != -1) return;
+        Debug.Log("Trying to insert at slot " + index);
+        PlacementManager.Instance.lastSelectedObject.annotation.schedule.InsertSlot(index);
+        PlacementManager.Instance.lastSelectedObject.UpdateAnnotaionStatus();
+        Schedule scheduleOfSelectedObject = PlacementManager.Instance.lastSelectedObject.annotation.schedule;
+        ARCalendarSlotContainer.GetChild(index).GetComponentInChildren<TextMeshPro>().text = scheduleOfSelectedObject.slots[index].name;
+    }
+    // ----------------- ARCalendar -----------------------------
+
+    // ----------------- Bubble Alert -----------------------------
+
+
+    // ----------------- Bubble Alert -----------------------------
 }
